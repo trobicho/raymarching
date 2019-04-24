@@ -1,0 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/24 14:15:32 by trobicho          #+#    #+#             */
+/*   Updated: 2019/04/24 15:09:27 by trobicho         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "init_mlx.h"
+#include "ray.h"
+
+void main()
+{
+	int	w = 512;
+	int h = 512;
+	t_mymlx	ml;
+
+	if (init_mlx(&ml, w, h, "marching") == -1)
+		return (-1);
+	ray_scan(&ml, w, h);
+	mlx_put_image_to_window(ml.mlx_ptr, ml.win_ptr, ml.img_ptr, 0, 0);
+	mlx_loop(ml.mlx_ptr);
+	return (0);
+}
