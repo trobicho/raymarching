@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   key.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/24 14:28:49 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/26 04:11:49 by trobicho         ###   ########.fr       */
+/*   Created: 2019/04/26 01:41:00 by trobicho          #+#    #+#             */
+/*   Updated: 2019/04/26 01:49:53 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#ifndef KEY_H
+# define KEY_H
 
-void	ray_scan(t_mymlx *ml);
+int	closer(void *param);
+int	key_hook(int keycode, void *param);
 #endif

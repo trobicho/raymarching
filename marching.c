@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 02:07:53 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/24 15:07:41 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/26 05:35:42 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ double	marching(t_vec3 ray_o, t_vec3 ray_d)
 	}
 	if (d_o > DIST_MAX)
 		return (DIST_MAX);
-	return (d_o);
+	return ((double)i);
 }

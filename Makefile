@@ -1,15 +1,15 @@
 CC = gcc
 CFLAGS = -g
 #CFLAGS = -Wall -Wextra -Werror
-SRCS = main.c ray.c marching.c scene.c vector.c init_mlx.c pixel.c
-HDRS = ray.h marching.h scene.h vector.h init_mlx.h pixel.h
+SRCS = main.c key.c camera.c ray.c marching.c scene.c vector.c quaternion.c init_mlx.c pixel.c
+HDRS = key.c camera.h ray.h marching.h scene.h vector.h quaternion.h init_mlx.h pixel.h
 OUTS = $(SRCS:.c=.o)
 NAME = marching
 
 all: $(NAME)
 
 $(NAME): $(OUTS)
-	$(CC) $(OUTS) $(CFLAGS) -lm -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(OUTS) $(CFLAGS) -lm -lmlx -framework OpenGL -framework AppKit -O3 -o $(NAME)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $^

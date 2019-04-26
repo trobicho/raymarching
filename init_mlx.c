@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:48:49 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/24 14:50:35 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/26 08:45:32 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ int	init_mlx(t_mymlx *init, int w, int h, char *name)
 	init->bpp /= 8;
 	init->w = w;
 	init->h = h;
+	init->cam.dir = (t_vec3){0.0, 0.0, 1.0};
+	init->cam.pos = (t_vec3){0.0, 0.0, -1.8};
 	return (0);
 }
