@@ -5,13 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/26 02:02:33 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/26 03:38:00 by trobicho         ###   ########.fr       */
+/*   Created: 2019/04/27 07:40:38 by trobicho          #+#    #+#             */
+/*   Updated: 2019/04/27 11:15:38 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef QUATERNION_H
 # define QUATERNION_H
+#include "vector.h"
 
 typedef struct	s_quaternion
 {
@@ -25,4 +26,5 @@ double			quat_length(t_quaternion q);
 t_quaternion	quat_normalize(t_quaternion q);
 t_quaternion	quat_conjug(t_quaternion q);
 t_quaternion	quat_mul(t_quaternion q1, t_quaternion q2);
+t_quaternion	quat_rotate(t_quaternion q, double angle, t_vec3 v);
 #endif

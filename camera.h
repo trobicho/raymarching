@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 02:00:32 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/26 03:58:02 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/27 16:02:26 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 typedef struct	s_cam
 {
 	t_vec3	dir;
+	t_vec3	up;
+	t_vec3	right;
 	t_vec3	pos;
 }				t_cam;
 

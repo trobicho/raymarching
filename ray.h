@@ -6,12 +6,13 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:28:49 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/26 04:11:49 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/27 07:05:07 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAY_H
 # define RAY_H
 
+int		ray_loop(void *param);
 void	ray_scan(t_mymlx *ml);
 #endif

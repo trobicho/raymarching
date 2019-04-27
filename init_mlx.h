@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:48:22 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/26 04:12:39 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/27 06:49:42 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct	s_mymlx
 	void		*img_ptr;
 	int			w;
 	int			h;
+	int			ray_w;
 	char		*buf;
 	int			bpp;
 	int			sline;
