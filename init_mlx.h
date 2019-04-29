@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:48:22 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/27 06:49:42 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/29 03:53:47 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct	s_mymlx
 	int			sline;
 	int			endian;
 	t_cam		cam;
+	int			normal_disp;
 }				t_mymlx;
 
 int	init_mlx(t_mymlx *init, int w, int h, char *name);

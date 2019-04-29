@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pixel.h                                            :+:      :+:    :+:   */
+/*   marching.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/24 14:52:06 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/28 17:21:34 by trobicho         ###   ########.fr       */
+/*   Created: 2019/04/23 02:07:48 by trobicho          #+#    #+#             */
+/*   Updated: 2019/04/29 00:37:21 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	PIXEL_H
-# define PIXEL_H
-#include "init_mlx.h"
+#ifndef MARCHING_H
+# define MARCHING_H
 #include "vector.h"
 
-void	putpixel(t_mymlx *ml, int x, int y, unsigned int color);
-void	putpixel_w(t_mymlx *ml, int x, int y, int w, unsigned int color);
-void	putpixel_vec_w(t_mymlx *ml, int x, int y, int w, t_vec3 vcolor);
+#define MAX_STEP	500
+#define DIST_MIN	0.05
+#define DIST_MAX	200.0
+
+double	marching(t_vec3 ray_o, t_vec3 ray_d, t_vec3 *p, int *hit);
 #endif

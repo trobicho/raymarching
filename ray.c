@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:18:54 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/28 01:18:10 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/29 03:53:29 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "pixel.h"
 #include "marching.h"
 #include "ray.h"
+#include "light.h"
 
 int		ray_loop(void *param)
 {
@@ -60,12 +61,16 @@ void	ray_scan(t_mymlx *ml)
 {
 	int		x, y;
 	double	d;
-	t_vec3	ray_o;
 	t_vec3	ray_d;
-	unsigned int color;
+	t_vec3	p;
+	t_vec3	color;
 	unsigned int col;
+	int			hit;
+	t_light	light;
 
-	ray_o = ml->cam.pos;
+	light.pos = (t_vec3){0.0, 5.0, 0.0};
+	light.pos = ml->cam.pos;
+	light.intensity = 1.0;
 	ray_d = ml->cam.dir;
 	y = 0;
 	while (y < ml->h)
@@ -73,14 +78,19 @@ void	ray_scan(t_mymlx *ml)
 		x = 0;
 		while (x < ml->w)
 		{
-			ray_d = pixel_to_ray(ml, x, y);
-			d = marching(ray_o, ray_d);
-			col = (255.0 * (d / MAX_STEP));
-			color = (unsigned int)(256*256*col + 256*col + col);
-			if (d == DIST_MAX)
-				color = 0x223399;
-			//color = d < DIST_MAX ? 0xaaaaaa : 0x0;
-			putpixel_w(ml, x, y, ml->ray_w, color);
+			ray_d = pixel_to_ray(ml, x, ml->h - y);
+			d = marching(ml->cam.pos, ray_d, &p, &hit);
+			if (hit == 0)
+				color = (t_vec3){0.0, 0.5, 0.2};
+			else
+			{
+				/*
+				col = (255.0 * (d / MAX_STEP));
+				color = (unsigned int)(256*256*col + 256*col + col);
+				*/
+				color = light_calc(light, p, ml->normal_disp);
+			}
+			putpixel_vec_w(ml, x, y, ml->ray_w, color);
 			x+=ml->ray_w;
 		}
 		y+=ml->ray_w;

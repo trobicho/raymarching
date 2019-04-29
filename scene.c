@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 01:58:53 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/28 01:22:06 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/29 02:24:52 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@
 
 double	scene_get_dist(t_vec3 v)
 {
-	return (sierpinski_de(v));
+	double	sd = mandelbulb_de(v);
+	double	pd = v.y + 2.0;
+	return (sd > pd ? pd : sd);
 }
+
 /*
 double	scene_get_dist(t_vec3 v)
 {
@@ -30,14 +33,26 @@ double	scene_get_dist(t_vec3 v)
 	v.y += v.y < 0 ? 1.5 : -1.5; 
 	return (vec_norme(v) - r);
 }
+*/
 
-double	scene_get_dist(t_vec3 v)
+double	sphere_de(t_vec3 v)
 {
 	double	r = 1.0;
 
 	return (vec_norme(v) - r);
 }
-*/
+
+double	torus_de(t_vec3 v)
+{
+	t_vec3	q;
+	t_vec3	t;
+	t_vec3	vtmp;
+
+	t = (t_vec3){2.0, 0.5, 0.0};
+	vtmp = (t_vec3){v.x, 0.0, v.z};
+	q = (t_vec3){vec_norme(vtmp) - t.x, v.y, 0.0}; 
+	return (vec_norme(q) - t.y);
+}
 
 /*
 double	scene_get_dist(t_vec3 v)
@@ -116,9 +131,10 @@ double	sierpinski_de(t_vec3 v)
 	double	r;
 	int		n;
 	double	scale = 2.0;
+	double	offset = 2.0;
 
 	n = 0;
-	while (n < 1)
+	while (n < 14)
 	{
 		if (v.x + v.y < 0)
 			v = (t_vec3){-v.y, -v.x, v.z};
@@ -126,11 +142,11 @@ double	sierpinski_de(t_vec3 v)
 			v = (t_vec3){-v.z, v.y, -v.x};
 		if (v.y + v.z < 0)
 			v = (t_vec3){v.x, -v.z, -v.y};
-		v = (t_vec3){v.x * scale, v.y * scale, v.z * scale};
-		v.x -= 1.0 * (scale - 1.0);
-		v.y -= 1.0 * (scale - 1.0);
-		v.z -= 1.0 * (scale - 1.0);
+		v = vec_scalar(v, scale);
+		v.x -= offset * (scale - 1.0);
+		v.y -= offset * (scale - 1.0);
+		v.z -= offset * (scale - 1.0);
 		n++;
 	}
-	return (vec_norme(v)) * pow(scale, (double)-n);
+	return ((vec_norme(v)) * pow(scale, (double)(-n)));
 }

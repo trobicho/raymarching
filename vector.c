@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 02:04:04 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/27 11:16:20 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/28 23:24:00 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,24 @@ t_vec3	vec_rotate(double angle, t_vec3 v)
 	view_tmp = quat_rotate(view_tmp, angle, v);
 	v = (t_vec3){view_tmp.x, view_tmp.y, view_tmp.z};
 	return (v);
+}
+
+t_vec3	vec_sub(t_vec3 d1, t_vec3 d2)
+{
+	return (t_vec3){d1.x - d2.x, d1.y - d2.y, d1.z - d2.z};
+}
+
+t_vec3	vec_add(t_vec3 d1, t_vec3 d2)
+{
+	return (t_vec3){d1.x + d2.x, d1.y + d2.y, d1.z + d2.z};
+}
+
+double	vec_dot(t_vec3 d1, t_vec3 d2)
+{
+	return (d1.x * d2.x + d1.y * d2.y + d1.z * d2.z);
+}
+
+t_vec3	vec_scalar(t_vec3 d, double s)
+{
+	return (t_vec3){d.x * s, d.y * s, d.z * s};
 }
