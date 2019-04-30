@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:18:54 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/29 03:53:29 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/30 01:53:19 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_vec3	pixel_to_ray(t_mymlx *ml, int x, int y)
 	r.x = ml->cam.right.x * lx + ml->cam.up.x * ly + ml->cam.dir.x * d_s;
 	r.y = ml->cam.right.y * lx + ml->cam.up.y * ly + ml->cam.dir.y * d_s;
 	r.z = ml->cam.right.z * lx + ml->cam.up.z * ly + ml->cam.dir.z * d_s;
-	return (r);
+	return (vec_normalize(r));
 			
 }
 
@@ -62,15 +62,10 @@ void	ray_scan(t_mymlx *ml)
 	int		x, y;
 	double	d;
 	t_vec3	ray_d;
-	t_vec3	p;
 	t_vec3	color;
 	unsigned int col;
-	int			hit;
-	t_light	light;
 
-	light.pos = (t_vec3){0.0, 5.0, 0.0};
-	light.pos = ml->cam.pos;
-	light.intensity = 1.0;
+	//light.pos = ml->cam.pos;
 	ray_d = ml->cam.dir;
 	y = 0;
 	while (y < ml->h)
@@ -79,8 +74,8 @@ void	ray_scan(t_mymlx *ml)
 		while (x < ml->w)
 		{
 			ray_d = pixel_to_ray(ml, x, ml->h - y);
-			d = marching(ml->cam.pos, ray_d, &p, &hit);
-			if (hit == 0)
+			d = marching(&ml->scene, ml->cam.pos, ray_d);
+			if (d >= DIST_MAX)
 				color = (t_vec3){0.0, 0.5, 0.2};
 			else
 			{
@@ -88,7 +83,7 @@ void	ray_scan(t_mymlx *ml)
 				col = (255.0 * (d / MAX_STEP));
 				color = (unsigned int)(256*256*col + 256*col + col);
 				*/
-				color = light_calc(light, p, ml->normal_disp);
+				color = light_calc(&ml->scene, vec_add(ml->cam.pos, vec_scalar(ray_d, d)), ml->normal_disp);
 			}
 			putpixel_vec_w(ml, x, y, ml->ray_w, color);
 			x+=ml->ray_w;

@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light.h                                            :+:      :+:    :+:   */
+/*   de.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/28 16:20:48 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/30 01:01:35 by trobicho         ###   ########.fr       */
+/*   Created: 2019/04/29 22:14:36 by trobicho          #+#    #+#             */
+/*   Updated: 2019/04/30 02:23:34 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIGHT_H
-# define LIGHT_H
+#ifndef	DE_H
+# define DE_H
 
 # include "scene.h"
 
-t_vec3			light_calc(t_scene *scene, t_vec3 p, int normal);
-t_vec3			get_normal(t_scene *scene, t_vec3 p); //obj direct
+double	sphere_de(t_object *obj, t_vec3 p);
+double	torus_de(t_object *obj, t_vec3 p);
+double	cone_de(t_object *obj, t_vec3 p);
+double	mandelbulb_de(t_object *obj, t_vec3 v);
+double	sierpinski_de(t_object *obj, t_vec3 v);
 #endif

@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:48:22 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/29 03:53:47 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/30 00:50:12 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define INIT_MLX
 
 #include "camera.h"
+#include "scene.h"
 
 typedef struct	s_mymlx
 {
@@ -28,6 +29,7 @@ typedef struct	s_mymlx
 	int			sline;
 	int			endian;
 	t_cam		cam;
+	t_scene		scene;
 	int			normal_disp;
 }				t_mymlx;
 

@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 01:41:03 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/29 03:58:45 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/29 18:03:33 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int			closer(void *param)
 static int	key_cam(t_mymlx *ml, int keycode)
 {
 	if (keycode == 126)
-		cam_translate(&ml->cam, (t_vec3){0.0, 0.0, 0.01});
+		cam_translate(&ml->cam, (t_vec3){0.0, 0.0, 0.1});
 	else if (keycode == 125)
-		cam_translate(&ml->cam, (t_vec3){0.0, 0.0, -0.01});
+		cam_translate(&ml->cam, (t_vec3){0.0, 0.0, -0.1});
 	else if (keycode == 123)
-		cam_translate(&ml->cam, (t_vec3){-0.01, 0.0, 0.0});
+		cam_translate(&ml->cam, (t_vec3){-0.1, 0.0, 0.0});
 	else if (keycode == 124)
-		cam_translate(&ml->cam, (t_vec3){0.01, 0.0, 0.0});
+		cam_translate(&ml->cam, (t_vec3){0.1, 0.0, 0.0});
 	else if (keycode == 86)
 		cam_rotate(&ml->cam, -3.14 / 90, ml->cam.up);
 	else if (keycode == 88)
