@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -g
 #CFLAGS = -Wall -Wextra -Werror
-SRCS = main.c key.c camera.c ray.c light.c marching.c scene.c de.c vector.c quaternion.c init_mlx.c pixel.c
-HDRS = key.c camera.h ray.h light.h marching.h scene.h de.h vector.h quaternion.h init_mlx.h pixel.h
+SRCS = main.c key.c camera.c ray.c light.c marching.c scene.c operator.c de.c vector.c quaternion.c init_mlx.c pixel.c
+HDRS = key.c camera.h ray.h light.h marching.h scene.h de.h operator.h vector.h quaternion.h init_mlx.h pixel.h
 OUTS = $(SRCS:.c=.o)
 NAME = marching
 

@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 01:58:53 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/30 01:32:47 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/30 14:59:03 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include <math.h>
 #include "vector.h"
 #include "scene.h"
+#include "operator.h"
+
+#include "de.h"
 
 double		scene_get_dist(t_scene *scene, t_vec3 v)
 {
@@ -22,12 +25,16 @@ double		scene_get_dist(t_scene *scene, t_vec3 v)
 	t_object	*obj_min;
 	t_list_obj	*list;
 
-	d_min = scene->l_obj->obj.sdf(&scene->l_obj->obj, v);
+	t_object	s_op = {.pos = (t_vec3){0.0,0.0,0.0}, .radius = 0.8, .radius2 = 0.2};
+
+	//d_min = scene->l_obj->obj.sdf(&scene->l_obj->obj, v);
+	d_min = op_intersect(torus_de(&s_op, v), scene->l_obj->obj.sdf(&scene->l_obj->obj, v));
 	obj_min = &scene->l_obj->obj;
 	list = scene->l_obj->next;
 	while (list != NULL)
 	{
-		d = list->obj.sdf(&list->obj, v);
+		//d = list->obj.sdf(&list->obj, v);
+		d = op_intersect(sphere_de(&s_op, v), list->obj.sdf(&list->obj, v));
 		if (d < d_min)
 		{
 			d_min = d;

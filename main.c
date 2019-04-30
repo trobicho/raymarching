@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:15:32 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/30 03:42:53 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/30 15:00:20 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,11 @@ static void	init(t_mymlx *ml)
 	mlx_hook(ml->win_ptr, 2, 0, &key_hook, (void*)ml);
 	mlx_hook(ml->win_ptr, 17, 0, &closer, (void*)ml);
 	mlx_loop_hook(ml->mlx_ptr, &ray_loop, (void*)ml);
-	ml->scene.light.pos = (t_vec3){0.0, 0.01, 0.0};
+	ml->scene.light.pos = (t_vec3){0.0, 2.0, -1.0};
 	ml->scene.light.intensity = 1.0;
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &torus_de);
+	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &mandelbulb_de);
 	obj->radius = 1.0;
 	obj->radius2 = 0.3;
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &torus_de);
-	obj->radius = 0.5;
-	obj->radius2 = 0.1;
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &torus_de);
-	obj->radius = 0.1;
-	obj->radius2 = 0.02;
-	obj->len = 0.01;
 }
 
 int	main(int ac, char **av)

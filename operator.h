@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   marching.h                                         :+:      :+:    :+:   */
+/*   operator.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/23 02:07:48 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/30 14:08:08 by trobicho         ###   ########.fr       */
+/*   Created: 2019/04/30 13:37:12 by trobicho          #+#    #+#             */
+/*   Updated: 2019/04/30 13:42:35 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MARCHING_H
-# define MARCHING_H
-#include "scene.h"
-#include "vector.h"
+#ifndef OPERATOR_H
+# define OPERATOR_H
+#include "de.h"
 
-#define MAX_STEP	2000
-#define DIST_MIN	0.00001
-#define DIST_MAX	30.0
-
-double	marching(t_scene *scene, t_vec3 ray_o, t_vec3 ray_d);
+double	op_sub(double d1, double d2);
+double	op_union(double d1, double d2);
+double	op_intersect(double d1, double d2);
 #endif
