@@ -9,7 +9,7 @@ NAME = marching
 all: $(NAME)
 
 $(NAME): $(OUTS)
-	$(CC) $(OUTS) $(CFLAGS) -lm -lmlx -framework OpenGL -framework AppKit -O3 -o $(NAME)
+	$(CC) $(OUTS) $(CFLAGS) -lm -lmlx -framework OpenGL -framework AppKit -Ofast -o $(NAME)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $^

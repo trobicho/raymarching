@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:48:49 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/30 02:55:17 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/01 09:07:46 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ int	init_mlx(t_mymlx *init, int w, int h, char *name)
 	init->cam.right = (t_vec3){1.0, 0.0, 0.0};
 	init->cam.pos = (t_vec3){0.0, 0.0, -3.0};
 	init->normal_disp = 0;
+	init->scene.l_obj = NULL;
+	init->scene.l_light = NULL;
 	return (0);
 }
