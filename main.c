@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:15:32 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/02 00:06:00 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/02 12:55:08 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	init(t_mymlx *ml)
 	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &mandelbulb_de);
 	obj->radius = 1.0;
 	obj->radius2 = 0.3;
+	obj->spec = 100;
 	obj->color = (t_vec3){1.0, 1.0, 1.0};
 	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.4, -1.2}, &sphere_de);
 	obj->radius = 0.1;

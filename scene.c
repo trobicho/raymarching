@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 01:58:53 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/01 22:25:24 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/02 12:54:49 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	l_obj_init_elem(t_list_obj *l, t_vec3 pos
 	l->obj.pos = pos;
 	l->obj.sdf = sdf;
 	l->obj.color = (t_vec3){1.0, 1.0, 1.0};
+	l->obj.spec = 1.0;
 }
 
 t_object	*scene_add_obj(t_scene *scene, t_vec3 pos

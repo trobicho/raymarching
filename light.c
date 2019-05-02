@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 16:23:41 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/01 12:48:00 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/02 13:57:23 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ t_vec3	light_calc(t_scene *scene, t_vec3 p, t_object *obj_hit, int normal)
 	t_vec3	n;
 	t_vec3	d_l;
 	double	d_l2;
-	double	intensity_pix;
+	double	diffuse;
+	double	spec;
 	double	d;
 	t_light	light;
 
@@ -30,7 +31,8 @@ t_vec3	light_calc(t_scene *scene, t_vec3 p, t_object *obj_hit, int normal)
 	d_l2 = vec_norme(d_l);
 	d_l2 *= d_l2;
 	n = get_normal(scene, p);
-	intensity_pix = pow((light.intensity * vec_dot(d_l, n) / d_l2), 1 / 2.2) / 255.0;
+	diffuse = pow((light.intensity * vec_dot(d_l, n) / d_l2), 1 / 2.2);
+	spec = pow(vec_dot(r, )
 	if (normal)
 		return (n);
 	if (intensity_pix < 0.0)
