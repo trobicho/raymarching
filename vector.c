@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 02:04:04 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/28 23:24:00 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/02 18:36:57 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,9 @@ double	vec_dot(t_vec3 d1, t_vec3 d2)
 t_vec3	vec_scalar(t_vec3 d, double s)
 {
 	return (t_vec3){d.x * s, d.y * s, d.z * s};
+}
+
+t_vec3	vec_reflect(t_vec3 d, t_vec3 n)
+{
+	return vec_sub(d, (vec_scalar(n, 2.0 * vec_dot(d, n))));
 }

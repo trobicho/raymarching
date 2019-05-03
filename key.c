@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 01:41:03 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/29 18:03:33 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/02 19:54:11 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static int	key_cam(t_mymlx *ml, int keycode)
 		cam_rotate(&ml->cam, 3.14 / 90, ml->cam.dir);
 	else if (keycode == 92)
 		cam_rotate(&ml->cam, -3.14 / 90, ml->cam.dir);
+	else if (keycode == 35)
+		printf("{%lf, %lf, %lf}\n", ml->cam.pos.x, ml->cam.pos.y, ml->cam.pos.z);
 	else
 		return (0);
 	return (1);

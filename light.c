@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 16:23:41 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/02 13:57:23 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/03 03:08:55 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,62 @@
 #include "marching.h"
 #include "light.h"
 
-t_vec3	light_calc(t_scene *scene, t_vec3 p, t_object *obj_hit, int normal)
+static double	get_phong(t_ray_inf ray, t_vec3 d_l, t_vec3 n)
+{
+	double	spec;
+	double	phong_dot;
+
+	phong_dot = vec_dot(vec_reflect(d_l, n), ray.r_d);
+	if (phong_dot > 0.0)
+		spec = pow(phong_dot, ray.obj_min->spec) * (ray.obj_min->spec + 2.0) / (2.0 * D_PI);
+	else
+		return (0.0);
+	return (spec);
+}
+
+t_vec3	light_calc(t_scene *scene, t_ray_inf ray, int normal)
 {
 	t_vec3	n;
 	t_vec3	d_l;
+	t_vec3	color;
 	double	d_l2;
 	double	diffuse;
+	double	intensity_pix;
 	double	spec;
 	double	d;
 	t_light	light;
 
 	light = scene->l_light->light;
-	d_l = vec_normalize(vec_sub(light.pos, p));
+	d_l = vec_normalize(vec_sub(light.pos, ray.p));
 	d_l2 = vec_norme(d_l);
 	d_l2 *= d_l2;
-	n = get_normal(scene, p);
+	n = get_normal(scene, ray.p);
 	diffuse = pow((light.intensity * vec_dot(d_l, n) / d_l2), 1 / 2.2);
-	spec = pow(vec_dot(r, )
+	spec = get_phong(ray, d_l, n) * ray.obj_min->ks;
+	intensity_pix = diffuse / 255.0;
 	if (normal)
 		return (n);
-	if (intensity_pix < 0.0)
+	if (intensity_pix + spec < 0.0)
+	{
 		intensity_pix = 0.0;
-	else if (intensity_pix > 1.0)
-		intensity_pix = 1.0;
+		spec = 0.0;
+	}
 	else
 	{
-		d = marching(scene, vec_add(p , vec_scalar(n, DIST_MIN * 1.5)), d_l, NULL);
-		if (d < vec_norme(vec_sub(light.pos, p)))
+		d = marching(scene, vec_add(ray.p , vec_scalar(n, DIST_MIN * 10)), d_l, NULL);
+		d += DIST_MIN * 10;
+		if (d < vec_norme(vec_sub(light.pos, ray.p))) 
+		{
 			intensity_pix = 0.0;
+			spec = 0.0; }
 	}
-	return (vec_scalar(obj_hit->color, intensity_pix));
+	if (intensity_pix > 1.0)
+		intensity_pix = 1.0;
+	color = vec_scalar(ray.obj_min->color, intensity_pix);
+	color.x += spec / 255.0;
+	color.y += spec / 255.0;
+	color.z += spec / 255.0;
+	return (color);
 }
 
 t_vec3	get_normal(t_scene *scene, t_vec3 p) //obj direct

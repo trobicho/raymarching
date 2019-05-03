@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   transform.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/24 14:28:49 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/02 15:50:21 by trobicho         ###   ########.fr       */
+/*   Created: 2019/05/02 23:11:43 by trobicho          #+#    #+#             */
+/*   Updated: 2019/05/03 01:20:32 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#ifndef TRANSFORM_H
+# define TRANSFORM_H
 
-# include "init_mlx.h"
+# include "quaternion.h"
 # include "scene.h"
 
-typedef struct 	s_ray_inf
-{
-	t_vec3		r_o;
-	t_vec3		r_d;
-	t_vec3		p;
-	double		d;
-	t_object	*obj_min;
-}				t_ray_inf;
-
-int		ray_loop(void *param);
-void	ray_scan(t_mymlx *ml);
+double	op_transform(t_vec3 p, t_object *obj);
+void	calc_transform(t_object *obj, double ax, double ay, double az);
 #endif

@@ -48,6 +48,8 @@ void		putpixel_vec_w(t_mymlx *ml, int x, int y, int w, t_vec3 vc)
 	unsigned int	color;
 	unsigned char	c[3];
 
+	vc = (t_vec3){(vc.x > 1.0 ? 1.0 : vc.x), (vc.y > 1.0 ? 1.0 : vc.y)
+		, (vc.z > 1.0 ? 1.0 : vc.z)};
 	c[0] = 255 * vc.x;
 	c[1] = 255 * vc.y;
 	c[2] = 255 * vc.z;

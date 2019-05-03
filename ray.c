@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:18:54 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/01 10:13:21 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/02 15:49:11 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,31 +60,25 @@ static t_vec3	pixel_to_ray(t_mymlx *ml, int x, int y)
 void	ray_scan(t_mymlx *ml)
 {
 	int		x, y;
-	double	d;
-	t_vec3	ray_d;
 	t_vec3	color;
 	unsigned int col;
-	t_object	*obj_min;
+	t_ray_inf	ray;
 
-	//light.pos = ml->cam.pos;
-	ray_d = ml->cam.dir;
+	ray.r_o = ml->cam.pos;
 	y = 0;
 	while (y < ml->h)
 	{
 		x = 0;
 		while (x < ml->w)
 		{
-			ray_d = pixel_to_ray(ml, x, ml->h - y);
-			d = marching(&ml->scene, ml->cam.pos, ray_d, &obj_min);
-			if (d >= DIST_MAX)
+			ray.r_d = pixel_to_ray(ml, x, ml->h - y);
+			ray.d = marching(&ml->scene, ml->cam.pos, ray.r_d, &ray.obj_min);
+			if (ray.d >= DIST_MAX)
 				color = (t_vec3){0.0, 0.5, 0.2};
 			else
 			{
-				/*
-				col = (255.0 * (d / MAX_STEP));
-				color = (unsigned int)(256*256*col + 256*col + col);
-				*/
-				color = light_calc(&ml->scene, vec_add(ml->cam.pos, vec_scalar(ray_d, d)), obj_min, ml->normal_disp);
+				ray.p = vec_add(ray.r_o, vec_scalar(ray.r_d, ray.d));
+				color = light_calc(&ml->scene, ray, ml->normal_disp);
 			}
 			putpixel_vec_w(ml, x, y, ml->ray_w, color);
 			x+=ml->ray_w;

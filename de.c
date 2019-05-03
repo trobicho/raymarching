@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 22:15:24 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/30 14:08:02 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/03 02:25:51 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ double	cone_de(t_object *obj, t_vec3 p)
 	q = vec_norme((t_vec3){p.x, p.y, 0.0});
 	c = vec_normalize((t_vec3){obj->radius, obj->len, 0.0});
 	return (c.x * q + c.y * p.z);
+}
+
+double	plane_de(t_object *obj, t_vec3 p)
+{
+	return (p.y);
 }
 
 /*
@@ -95,7 +100,7 @@ double	mandelbulb_de(t_object *obj, t_vec3 v)
 	w = v;
 	r = w.x * w.x + w.y * w.y + w.z * w.z;
 	i = 0;
-	while (i < 20)
+	while (i < 25)
 	{
 		dr = 8.0 * sqrt(r * r * r * r * r * r * r) * dr + 1.0;
 		z = w;
