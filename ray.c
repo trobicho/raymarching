@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:18:54 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/02 15:49:11 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/04 05:29:05 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,7 @@ void	ray_scan(t_mymlx *ml)
 		while (x < ml->w)
 		{
 			ray.r_d = pixel_to_ray(ml, x, ml->h - y);
-			ray.d = marching(&ml->scene, ml->cam.pos, ray.r_d, &ray.obj_min);
-			if (ray.d >= DIST_MAX)
-				color = (t_vec3){0.0, 0.5, 0.2};
-			else
-			{
-				ray.p = vec_add(ray.r_o, vec_scalar(ray.r_d, ray.d));
-				color = light_calc(&ml->scene, ray, ml->normal_disp);
-			}
+			color = get_color(&ml->scene, ray, 20);
 			putpixel_vec_w(ml, x, y, ml->ray_w, color);
 			x+=ml->ray_w;
 		}

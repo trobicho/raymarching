@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 01:57:22 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/03 01:31:22 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/04 02:52:12 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_object
 {
 	t_vec3		pos;
 	t_vec3		color;
+	double		mirror;
 	double		spec;
 	double		radius;
 	double		radius2;
@@ -47,6 +48,7 @@ typedef struct	s_object
 	t_transform	transform;
 	int			is_rot;
 	int			is_mov;
+	double		b_sphere_r;
 }				t_object;
 
 typedef struct	s_list_obj

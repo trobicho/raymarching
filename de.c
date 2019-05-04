@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 22:15:24 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/03 02:25:51 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/04 04:40:00 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 
 double	sphere_de(t_object *obj, t_vec3 p)
 {
-	return (vec_norme(vec_sub(p, obj->pos)) - obj->radius);
-	//return (vec_norme(v) - obj->radius);
+	return (vec_norme(p) - obj->radius);
 }
 
 double	torus_de(t_object *obj, t_vec3 p)
@@ -46,6 +45,8 @@ double	cone_de(t_object *obj, t_vec3 p)
 
 double	plane_de(t_object *obj, t_vec3 p)
 {
+	if (p.y < 0)
+		return (-p.y - 0.1);
 	return (p.y);
 }
 
@@ -139,7 +140,7 @@ double	sierpinski_de(t_object *obj, t_vec3 v)
 	double	offset = 1.0;
 
 	n = 0;
-	while (n < 4)
+	while (n < 2)
 	{
 		if (v.x + v.y < 0)
 			v = (t_vec3){-v.y, -v.x, v.z};

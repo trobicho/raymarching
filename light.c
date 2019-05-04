@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 16:23:41 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/03 03:08:55 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/04 04:23:06 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,27 @@ static double	get_phong(t_ray_inf ray, t_vec3 d_l, t_vec3 n)
 	else
 		return (0.0);
 	return (spec);
+}
+
+t_vec3	get_color(t_scene *scene, t_ray_inf ray, int rebound)
+{
+	if (rebound > 0)
+	{
+		ray.d = marching(scene, ray.r_o, ray.r_d, &ray.obj_min);
+		if (ray.d >= DIST_MAX)
+			return ((t_vec3){0.0, 0.5, 0.2});
+		ray.p = vec_add(ray.r_o, vec_scalar(ray.r_d, ray.d));
+		if (ray.obj_min->mirror > 0.0)
+		{
+			ray.r_o = vec_add(ray.r_o, vec_scalar(ray.r_d, ray.d));
+			ray.r_d = vec_reflect(ray.r_d, get_normal(scene, ray.p));
+			ray.r_o = vec_add(ray.r_o, vec_scalar(ray.r_d, DIST_MIN * 10.0));
+			return (get_color(scene, ray, rebound - 1));
+		}
+	}
+	else if(rebound <= 0)
+		return ((t_vec3){0.0, 0.0, 0.0});
+	return (light_calc(scene, ray, 0));
 }
 
 t_vec3	light_calc(t_scene *scene, t_ray_inf ray, int normal)

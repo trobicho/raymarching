@@ -6,21 +6,26 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 23:12:51 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/03 03:47:48 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/04 00:05:27 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "transform.h"
 #include "scene.h"
+#include "vector.h"
 
 double	op_transform(t_vec3 p, t_object *obj)
 {
 	t_quaternion	p_t;
 	t_transform		t;
+	t_object		s_obj;
+	double			r;
 
 	t = obj->transform;
 	if (obj->is_mov)
 		p = (t_vec3){p.x - t.mov.x, p.y - t.mov.y, p.z - t.mov.z};
+	if (obj->b_sphere_r > 0.0 && (r = (vec_norme(p) - obj->b_sphere_r)) > 0.1)
+		return (r);
 	if (obj->is_rot)
 	{
 		p_t = (t_quaternion){p.x, p.y, p.z, 0.0};

@@ -1,1 +1,1 @@
-vim -p main.c key.c key.h ray.c ray.h light.c light.h marching.c marching.h scene.c scene.h operator.c operator.h de.c de.h camera.c camera.h quaternion.c quaternion.h vector.c vector.h init_mlx.c init_mlx.h pixel.c pixel.h Makefile
+vim -p main.c key.c key.h ray.c ray.h light.c light.h marching.c marching.h scene.c scene.h operator.c operator.h transform.c transform.h de.c de.h camera.c camera.h quaternion.c quaternion.h vector.c vector.h init_mlx.c init_mlx.h pixel.c pixel.h Makefile

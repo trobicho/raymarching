@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 01:58:53 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/03 01:15:08 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/04 04:41:00 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ static void	l_obj_init_elem(t_list_obj *l, t_vec3 pos, sdf_f sdf)
 	};
 	l->obj.is_rot = 0;
 	l->obj.is_mov = 0;
+	l->obj.b_sphere_r = 0.0;
+	l->obj.mirror = 0.0;
 }
 
 t_object	*scene_add_obj(t_scene *scene, t_vec3 pos, sdf_f sdf)
