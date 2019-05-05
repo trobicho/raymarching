@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 01:57:22 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/04 02:52:12 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/05 06:01:35 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct	s_light
 {
 	t_vec3	pos;
+	t_vec3	color;
 	double	intensity;
 }				t_light;
 
@@ -32,11 +33,12 @@ typedef struct	s_transform
 
 typedef struct	s_object	t_object;
 
-typedef double (*sdf_f)(struct s_object *object, t_vec3 p);
+typedef double	(*sdf_f)(struct s_object *object, t_vec3 p);
 
 typedef struct	s_object
 {
 	t_vec3		pos;
+	t_vec3		normal;
 	t_vec3		color;
 	double		mirror;
 	double		spec;
@@ -67,6 +69,7 @@ typedef struct	s_scene
 {
 	t_list_light	*l_light;
 	t_list_obj		*l_obj;
+	double			ambient;
 }				t_scene;
 
 double			scene_get_dist(t_scene *scene, t_vec3 v, t_object **obj_min);

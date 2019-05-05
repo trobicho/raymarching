@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 02:02:24 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/02 15:53:38 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/05 01:10:57 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_vec3			vec_rotate(double angle, t_vec3 v);
 t_vec3			vec_add(t_vec3 d1, t_vec3 d2);
 t_vec3			vec_sub(t_vec3 d1, t_vec3 d2);
 double			vec_dot(t_vec3 d1, t_vec3 d2);
+t_vec3			vec_mul(t_vec3 d1, t_vec3 d2);
 t_vec3			vec_scalar(t_vec3 d, double s);
 t_vec3			vec_reflect(t_vec3 d, t_vec3 n);
 #endif

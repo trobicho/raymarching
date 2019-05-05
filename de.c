@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 22:15:24 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/04 04:40:00 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/05 03:21:25 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,47 +45,25 @@ double	cone_de(t_object *obj, t_vec3 p)
 
 double	plane_de(t_object *obj, t_vec3 p)
 {
-	if (p.y < 0)
-		return (-p.y - 0.1);
-	return (p.y);
-}
-
-/*
-double	scene_get_dist(t_vec3 v)
-{
-	int		i;
-	t_vec3	z = v;
-	double	dr = 1.0;
-	double	r = 0.0;
-	double	theta;
-	double	s_theta;
-	double	phi;
-	double	zr;
-
-	z.z = v.y;
-	z.y = v.z;
-	i = 0;
-	while (i < 10)
+	if (obj->normal.x)
 	{
-		r = vec_norme(z);
-		if (r > 5.0)
-			break;
-		theta = acos(z.z / r);
-		phi = atan2(z.y, z.x);
-		dr = pow(r, 7.0) * 8.0 * dr + 1.0;
-		zr = pow(r, 8.0);
-		theta *= 8.0;
-		phi *= 8.0;
-		s_theta = sin(theta);
-		z = (t_vec3){zr*s_theta*cos(phi), zr*sin(phi)*s_theta, zr*cos(theta)};
-		z.x += v.x;
-		z.z += v.y;
-		z.y += v.z;
-		i++;
+		if (p.x < 0)
+			return (-p.x - 0.1);
+		return (p.x);
 	}
-	return (0.5 * log(r) * r / dr);
+	else if (obj->normal.y)
+	{
+		if (p.y < 0)
+			return (-p.y - 0.1);
+		return (p.y);
+	}
+	else if (obj->normal.z)
+	{
+		if (p.z < 0)
+			return (-p.z - 0.1);
+		return (p.z);
+	}
 }
-*/
 
 double	mandelbulb_de(t_object *obj, t_vec3 v)
 {

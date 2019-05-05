@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 02:07:53 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/04 02:27:45 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/05 03:10:20 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ double	marching(t_scene *scene, t_vec3 ray_o, t_vec3 ray_d, t_object **obj_min)
 		p.z = ray_o.z + d_o * ray_d.z;
 		d_s = scene_get_dist(scene, p, obj_min);
 		d_o += d_s;
-		if (d_s < 0)
-		{
-			//printf("d_s = %lf\n", d_s);
-		}
 		if (d_o > DIST_MAX || d_s < DIST_MIN)
 			break ;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 23:12:51 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/04 00:05:27 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/04 20:56:25 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,18 @@ void	calc_transform(t_object *obj, double ax, double ay, double az)
 	ax *= D_PI / 180.0;
 	ay *= D_PI / 180.0;
 	az *= D_PI / 180.0;
-
 	qx.x = sin(-ax / 2.0);
 	qx.y = 0.0;
 	qx.z = 0.0;
 	qx.w = cos(-ax / 2.0);
-
 	qy.x = 0.0;
 	qy.y = sin(-ay / 2.0);
 	qy.z = 0.0;
 	qy.w = cos(-ay / 2.0);
-	
 	qz.x = 0.0;
 	qz.y = 0.0;
 	qz.z = sin(-az / 2.0);
 	qz.w = cos(-az / 2.0);
-
 	obj->transform.q = quat_mul(quat_mul(qx, qy), qz);
 	obj->is_rot = 1;
 }
