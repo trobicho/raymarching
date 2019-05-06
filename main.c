@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:15:32 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/06 05:00:33 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/06 21:01:19 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ static void	init(t_mymlx *ml)
 	obj->ks = 0.1;
 
 	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 2.0, 3.0}, &csg_sub);
+	obj->b_sphere_r = 1.28;
 	obj->csg = malloc(sizeof(t_csg));
 	obj->mirror = 0.8;
 	init_obj(&obj->csg->o1, (t_vec3){0.0, 0.0, 0.0}, &sphere_de);
