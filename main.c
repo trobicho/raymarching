@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:15:32 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/05 06:14:02 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/06 00:02:09 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "scene.h"
 #include "de.h"
 #include "transform.h"
+#include "operator.h"
 
 /*
 static void	init(t_mymlx *ml)
@@ -98,59 +99,64 @@ static void	init(t_mymlx *ml)
 	mlx_hook(ml->win_ptr, 17, 0, &closer, (void*)ml);
 	mlx_loop_hook(ml->mlx_ptr, &ray_loop, (void*)ml);
 
-	ml->scene.ambient = 0.3;
-	scene_add_light(&ml->scene, (t_vec3){-5.0, 4.0, 0.0}, 30000.0);
-	scene_add_light(&ml->scene, (t_vec3){5.0, 4.0, 0.0}, 30000.0);
-	scene_add_light(&ml->scene, (t_vec3){0.0, 0.1, 3.0}, 30000.0);
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &sphere_de);
-	obj->transform.mov = (t_vec3){-2.5, 2.0, 3.0};
-	obj->is_mov = 1;
+	ml->scene.ambient = 0.1;
+	scene_add_light(&ml->scene, (t_vec3){-5.0, 4.0, 0.0}, 3000.0);
+	scene_add_light(&ml->scene, (t_vec3){5.0, 4.0, 0.0}, 3000.0);
+	scene_add_light(&ml->scene, (t_vec3){0.0, 4.0, 3.0}, 100000.0);
+
+	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 1.0, -5.0}, &sierpinski_de);
+	obj->b_sphere_r = 1.7;
+	obj->color = (t_vec3){1.0, 0.0, 0.0};
+	calc_transform(obj, 33.3, 33.3, -33.3);
+
+	obj = scene_add_obj(&ml->scene, (t_vec3){-3.2, 2.0, 3.0}, &sphere_de);
 	obj->radius = 1.0;
 	obj->spec = 10;
 	obj->ks = 10;
 	obj->mirror = 0.5;
 	obj->color = (t_vec3){1.0, 0.0, 0.0};
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &sphere_de);
+	obj = scene_add_obj(&ml->scene, (t_vec3){3.2, 2.0, 3.0}, &sphere_de);
 	obj->color = (t_vec3){1.0, 1.0, 0.0};
-	obj->transform.mov = (t_vec3){2.5, 2.0, 3.0};
 	obj->mirror = 0.5;
-	obj->is_mov = 1;
 	obj->radius = 1.0;
 	obj->spec = 1000;
 	obj->ks = 1000;
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &mandelbulb_de);
+	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 2.0, 3.0}, &csg_sub);
+	obj->csg = malloc(sizeof(*obj->csg));
+	obj->csg->o2.csg = malloc(sizeof(*obj->csg));
+	obj->csg->o1.sdf = &sphere_de;
+	obj->csg->o2.sdf = &csg_union;
+	obj->b_sphere_r = 0.0;
+	obj->csg->o1.radius = 1.28;
 	obj->color = (t_vec3){1.0, 1.0, 1.0};
-	obj->transform.mov = (t_vec3){0.0, 2.0, 3.0};
-	obj->radius = 0.2;
-	obj->is_mov = 1;
-	obj->mirror = 0.6;
+	obj->csg->o2.csg->o1.radius = 1.0;
+	obj->csg->o2.csg->o1.radius2 = 0.3;
+	obj->csg->o2.csg->o1.b_sphere_r = 0.0;
+	obj->csg->o2.csg->o1.sdf = &torus_de;
+	calc_transform(&obj->csg->o2.csg->o1, 33.3, 33.3, -33.3);
+	obj->csg->o2.csg->o2.radius = 1.0;
+	obj->csg->o2.csg->o2.radius2 = 0.3;
+	obj->csg->o2.csg->o2.b_sphere_r = 0.0;
+	obj->csg->o2.csg->o2.sdf = &torus_de;
+	calc_transform(&obj->csg->o2.csg->o2, -33.3, -33.3, 33.3);
+	obj->mirror = 0.4;
 
 	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &plane_de);
 	obj->color = (t_vec3){0.0, 1.0, 1.0};
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &plane_de);
-	obj->transform.mov = (t_vec3){0.0, 20.0, 0.0};
-	obj->is_mov = 1;
+	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 20.0, 0.0}, &plane_de);
 	obj->color = (t_vec3){0.0, 0.0, 1.0};
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &plane_de);
+	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 20.0}, &plane_de);
 	obj->normal = (t_vec3){0.0, 0.0, 1.0};
-	obj->transform.mov = (t_vec3){0.0, 0.0, 20.0};
-	obj->is_mov = 1;
 	obj->color = (t_vec3){1.0, 0.0, 0.0};
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &plane_de);
+	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, -10.0}, &plane_de);
 	obj->normal = (t_vec3){0.0, 0.0, 1.0};
-	obj->transform.mov = (t_vec3){0.0, 0.0, -10.0};
-	obj->is_mov = 1;
 	obj->color = (t_vec3){1.0, 1.0, 0.0};
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &plane_de);
+	obj = scene_add_obj(&ml->scene, (t_vec3){20.0, 0.0, 0.0}, &plane_de);
 	obj->normal = (t_vec3){1.0, 0.0, 0.0};
 	obj->color = (t_vec3){0.0, 1.0, 0.0};
-	obj->transform.mov = (t_vec3){20.0, 0.0, 0.0};
-	obj->is_mov = 1;
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &plane_de);
+	obj = scene_add_obj(&ml->scene, (t_vec3){-20.0, 0.0, 0.0}, &plane_de);
 	obj->color = (t_vec3){1.0, 0.0, 1.0};
 	obj->normal = (t_vec3){1.0, 0.0, 0.0};
-	obj->transform.mov = (t_vec3){-20.0, 0.0, 0.0};
-	obj->is_mov = 1;
 }
 
 int	main(int ac, char **av)

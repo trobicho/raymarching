@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 01:58:53 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/05 03:16:27 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/06 00:08:03 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ double		scene_get_dist(t_scene *scene, t_vec3 v, t_object **obj_min)
 	double		d;
 	t_list_obj	*list;
 
-	d_min = op_transform(v, &scene->l_obj->obj);
+	d_min = op_transform(&scene->l_obj->obj, v);
 	if (obj_min)
 		*obj_min = &scene->l_obj->obj;
 	list = scene->l_obj->next;
 	while (list != NULL)
 	{
-		d = op_transform(v, &list->obj);
+		d = op_transform(&list->obj, v);
 		if (d < d_min)
 		{
 			d_min = d;
@@ -52,14 +52,11 @@ static void	l_obj_init_elem(t_list_obj *l, t_vec3 pos, sdf_f sdf)
 	l->obj.normal = (t_vec3){0.0, 1.0, 0.0};
 	l->obj.spec = 1.0;
 	l->obj.ks = 0.0;
-	l->obj.transform = (t_transform){
-		.q = (t_quaternion){0.0, 0.0, 0.0, 1.0},
-		.mov = (t_vec3){0.0, 0.0, 0.0},
-	};
+	l->obj.rotate = (t_quaternion){0.0, 0.0, 0.0, 1.0},
 	l->obj.is_rot = 0;
-	l->obj.is_mov = 0;
 	l->obj.b_sphere_r = 0.0;
 	l->obj.mirror = 0.0;
+	l->obj.csg = NULL;
 }
 
 t_object	*scene_add_obj(t_scene *scene, t_vec3 pos, sdf_f sdf)

@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 23:12:51 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/04 20:56:25 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/06 00:08:39 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,21 @@
 #include "scene.h"
 #include "vector.h"
 
-double	op_transform(t_vec3 p, t_object *obj)
+double	op_transform(t_object *obj, t_vec3 p)
 {
 	t_quaternion	p_t;
-	t_transform		t;
+	t_quaternion	q;
 	t_object		s_obj;
 	double			r;
 
-	t = obj->transform;
-	if (obj->is_mov)
-		p = (t_vec3){p.x - t.mov.x, p.y - t.mov.y, p.z - t.mov.z};
+	q = obj->rotate;
+	p = (t_vec3){p.x - obj->pos.x, p.y - obj->pos.y, p.z - obj->pos.z};
 	if (obj->b_sphere_r > 0.0 && (r = (vec_norme(p) - obj->b_sphere_r)) > 0.1)
 		return (r);
 	if (obj->is_rot)
 	{
 		p_t = (t_quaternion){p.x, p.y, p.z, 0.0};
-		p_t = quat_mul(quat_mul(t.q, p_t), quat_conjug(t.q));
+		p_t = quat_mul(quat_mul(q, p_t), quat_conjug(q));
 		p = (t_vec3){p_t.x, p_t.y, p_t.z};
 	}
 	return (obj->sdf(obj, p));
@@ -56,6 +55,6 @@ void	calc_transform(t_object *obj, double ax, double ay, double az)
 	qz.y = 0.0;
 	qz.z = sin(-az / 2.0);
 	qz.w = cos(-az / 2.0);
-	obj->transform.q = quat_mul(quat_mul(qx, qy), qz);
+	obj->rotate = quat_mul(quat_mul(qx, qy), qz);
 	obj->is_rot = 1;
 }

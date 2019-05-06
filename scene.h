@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 01:57:22 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/05 06:01:35 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/06 00:03:55 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,34 +24,37 @@ typedef struct	s_light
 	double	intensity;
 }				t_light;
 
-typedef struct	s_transform
-{
-	t_quaternion	q;
-	t_vec3			mov;
-}				t_transform;
-
 
 typedef struct	s_object	t_object;
 
 typedef double	(*sdf_f)(struct s_object *object, t_vec3 p);
 
+typedef	struct	s_csg		t_csg;
+
 typedef struct	s_object
 {
-	t_vec3		pos;
-	t_vec3		normal;
-	t_vec3		color;
-	double		mirror;
-	double		spec;
-	double		radius;
-	double		radius2;
-	double		len;
-	double		ks;
-	sdf_f		sdf;
-	t_transform	transform;
-	int			is_rot;
-	int			is_mov;
-	double		b_sphere_r;
+	t_vec3			pos;
+	t_vec3			normal;
+	t_vec3			color;
+	double			mirror;
+	double			spec;
+	double			radius;
+	double			radius2;
+	double			len;
+	double			ks;
+	sdf_f			sdf;
+	t_quaternion	rotate;
+	t_csg			*csg;
+	int				is_rot;
+	double			b_sphere_r;
 }				t_object;
+
+typedef	struct	s_csg
+{
+	t_object	o1;
+	t_object	o2;
+}				t_csg;
+
 
 typedef struct	s_list_obj
 {

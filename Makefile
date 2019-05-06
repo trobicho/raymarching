@@ -11,8 +11,10 @@ all: $(NAME)
 $(NAME): $(OUTS)
 	$(CC) $(OUTS) $(CFLAGS) -lm -lmlx -framework OpenGL -framework AppKit -Ofast -o $(NAME)
 
+linux: $(OUTS)
+	$(CC) $(OUTS) $(CFLAGS) -lmlx -lX11 -lXext -lm -I../42/minilibx -g -o $(NAME)
 %.o : %.c
-	$(CC) $(CFLAGS) -c $^
+	$(CC) $(CFLAGS) -I../42/minilibx -c $^
 
 clean:
 	rm -f $(OUTS)
