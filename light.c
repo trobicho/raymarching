@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 16:23:41 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/05 06:03:33 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/06 04:12:59 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_vec3	get_phong(t_light *light, t_ray_inf ray, t_vec3 d_l, t_vec3 n)
 	if (phong_dot > 0.0)
 	{
 		spec = pow(phong_dot, ray.obj_min->spec)
-			* (ray.obj_min->spec + 2.0) / (2.0 * D_PI) / 255.0;
+			* (ray.obj_min->spec + 2.0) / (2.0 * M_PI);
 	}
 	else
 		return ((t_vec3){0.0, 0.0, 0.0});
@@ -86,12 +86,12 @@ t_vec3	light_calc(t_scene *scene, t_ray_inf ray, int normal)
 	{
 		light = l_light->light;
 		d_l = vec_normalize(vec_sub(light.pos, ray.p));
-		d_l2 = vec_norme(d_l);
+		d_l2 = vec_norme(vec_sub(light.pos, ray.p));
 		d_l2 *= d_l2;
 		n = get_normal(scene, ray.p);
 		diffuse = (t_vec3){0.0, 0.0, 0.0};
 		if ((vd = vec_dot(d_l, n)) > 0.0)
-			diffuse = vec_scalar(vec_mul(light.color, ray.obj_min->color), 1 / 255.0);
+			diffuse = vec_scalar(vec_mul(light.color, ray.obj_min->color), vd);
 		spec = vec_scalar(get_phong(&light, ray, d_l, n), ray.obj_min->ks);
 		if (normal)
 			return (n);
@@ -106,10 +106,12 @@ t_vec3	light_calc(t_scene *scene, t_ray_inf ray, int normal)
 			}
 		}
 		if (vd > 0.0)
-			color = vec_add(color, vec_scalar(vec_add(diffuse, spec)
-					, pow((light.intensity * vd / d_l2), 1 / 2.2)));
+			color = vec_add(color, vec_scalar(vec_add(diffuse, spec), light.intensity / (M_PI * d_l2)));
 		l_light = l_light->next;
 	}
+	color.x = pow(color.x, 1 / 2.2);
+	color.y = pow(color.y, 1 / 2.2);
+	color.z = pow(color.z, 1 / 2.2);
 	return (color);
 }
 

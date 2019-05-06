@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 01:58:53 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/06 00:08:03 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/06 03:37:26 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ double		scene_get_dist(t_scene *scene, t_vec3 v, t_object **obj_min)
 	return (d_min);
 }
 
-static void	l_obj_init_elem(t_list_obj *l, t_vec3 pos, sdf_f sdf)
+static void	l_obj_init_elem(t_list_obj *l, t_vec3 pos, t_sdf_f sdf)
 {
 	l->next = NULL;
 	l->obj.pos = pos;
@@ -59,7 +59,22 @@ static void	l_obj_init_elem(t_list_obj *l, t_vec3 pos, sdf_f sdf)
 	l->obj.csg = NULL;
 }
 
-t_object	*scene_add_obj(t_scene *scene, t_vec3 pos, sdf_f sdf)
+void		init_obj(t_object *obj, t_vec3 pos, t_sdf_f sdf)
+{
+	obj->pos = pos;
+	obj->sdf = sdf;
+	obj->color = (t_vec3){1.0, 1.0, 1.0};
+	obj->normal = (t_vec3){0.0, 1.0, 0.0};
+	obj->spec = 1.0;
+	obj->ks = 0.0;
+	obj->rotate = (t_quaternion){0.0, 0.0, 0.0, 1.0},
+	obj->is_rot = 0;
+	obj->b_sphere_r = 0.0;
+	obj->mirror = 0.0;
+	obj->csg = NULL;
+}
+
+t_object	*scene_add_obj(t_scene *scene, t_vec3 pos, t_sdf_f sdf)
 {
 	t_list_obj	*list;
 

@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 01:57:22 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/06 00:03:55 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/06 03:37:32 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct	s_light
 
 typedef struct	s_object	t_object;
 
-typedef double	(*sdf_f)(struct s_object *object, t_vec3 p);
+typedef double	(*t_sdf_f)(struct s_object *object, t_vec3 p);
 
 typedef	struct	s_csg		t_csg;
 
@@ -42,7 +42,7 @@ typedef struct	s_object
 	double			radius2;
 	double			len;
 	double			ks;
-	sdf_f			sdf;
+	t_sdf_f			sdf;
 	t_quaternion	rotate;
 	t_csg			*csg;
 	int				is_rot;
@@ -76,6 +76,7 @@ typedef struct	s_scene
 }				t_scene;
 
 double			scene_get_dist(t_scene *scene, t_vec3 v, t_object **obj_min);
-t_object		*scene_add_obj(t_scene *scene, t_vec3 pos, sdf_f sdf);
+t_object		*scene_add_obj(t_scene *scene, t_vec3 pos, t_sdf_f sdf);
 t_light			*scene_add_light(t_scene *scene, t_vec3 pos, double intensity);
+void			init_obj(t_object *obj, t_vec3 pos, t_sdf_f sdf);
 #endif

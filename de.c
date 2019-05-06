@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 22:15:24 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/05 03:21:25 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/06 04:57:40 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,26 @@ double	torus_de(t_object *obj, t_vec3 p)
 
 double	cone_de(t_object *obj, t_vec3 p)
 {
-	double	q;
+	t_vec3	q;
 	double	r;
+	double	d1;
+	double	d2;
+	double	d1t;
+	double	d2t;
 	t_vec3	c;
 
-	q = vec_norme((t_vec3){p.x, p.y, 0.0});
+	q = (t_vec3){vec_norme((t_vec3){p.x, p.y, 0.0}), p.y, 0.0};
 	c = vec_normalize((t_vec3){obj->radius, obj->len, 0.0});
-	return (c.x * q + c.y * p.z);
+	d1 = -q.y - 1.0;
+	d2 = fmax(vec_dot(q, c), q.y);
+	d1t = d1;
+	d2t = d2;
+	if (d1 < 0|| d2 < 0)
+	{
+		d1t = 0.0;
+		d2t = 0.0;
+	}
+	return vec_norme((t_vec3){d1t, d2t, 0.0}) + fmin(fmax(d1, d2), 0.0);
 }
 
 double	plane_de(t_object *obj, t_vec3 p)
@@ -63,6 +76,7 @@ double	plane_de(t_object *obj, t_vec3 p)
 			return (-p.z - 0.1);
 		return (p.z);
 	}
+	return (p.y);
 }
 
 double	mandelbulb_de(t_object *obj, t_vec3 v)
