@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:15:32 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/06 21:01:19 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/07 14:54:08 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include "transform.h"
 #include "operator.h"
 
-/*
 static void	init(t_mymlx *ml)
 {
 	t_object	*obj;
@@ -27,8 +26,8 @@ static void	init(t_mymlx *ml)
 	mlx_hook(ml->win_ptr, 2, 0, &key_hook, (void*)ml);
 	mlx_hook(ml->win_ptr, 17, 0, &closer, (void*)ml);
 	mlx_loop_hook(ml->mlx_ptr, &ray_loop, (void*)ml);
-	scene_add_light(&ml->scene, (t_vec3){0.0, 3.0, 0.0}, 100000);
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &torus_de);
+	scene_add_light(&ml->scene, (t_vec3){0.0, 8.0, -8.0}, 300);
+	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 4.0, 2.0}, &torus_de);
 	calc_transform(obj, 33.3, 33.3, -33.3);
 	obj->radius = 1.5;
 	obj->radius2 = 0.3;
@@ -37,25 +36,17 @@ static void	init(t_mymlx *ml)
 	obj->mirror = 0.9;
 	obj->b_sphere_r = obj->radius + obj->radius2;
 	obj->color = (t_vec3){0.5, 1.0, 0.0};
-	obj->transform.mov = (t_vec3){0.0, 4.0, 2.0};
-	obj->is_mov = 1;
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &sphere_de);
+	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 4.0, 2.0}, &sphere_de);
 	obj->radius = 0.5;
-	obj->transform.mov = (t_vec3){0.0, 4.0, 2.0};
-	obj->is_mov = 1;
 	obj->color = (t_vec3){1.0, 0.0, 0.0};
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &sierpinski_de);
+	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 1.0, 2.0}, &sierpinski_de);
 	obj->mirror = 0.4;
 	obj->b_sphere_r = 1.7;
 	obj->color = (t_vec3){1.0, 1.0, 0.0};
 	calc_transform(obj, 33.3, 33.3, -33.3);
-	obj->transform.mov = (t_vec3){0.0, 1.0, 2.0};
-	obj->is_mov = 1;
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &mandelbulb_de);
+	obj = scene_add_obj(&ml->scene, (t_vec3){-3.0, 3.0, 2.0}, &mandelbulb_de);
 	calc_transform(obj, 90.0, 45.0, 0.0);
-	obj->transform.mov = (t_vec3){-3.0, 3.0, 2.0};
 	obj->b_sphere_r = 1.0;
-	obj->is_mov = 1;
 	obj->radius = 1.0;
 	obj->radius2 = 0.3;
 	obj->spec = 1;
@@ -64,33 +55,23 @@ static void	init(t_mymlx *ml)
 
 	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &plane_de);
 	obj->color = (t_vec3){0.0, 1.0, 1.0};
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &plane_de);
-	obj->transform.mov = (t_vec3){0.0, 20.0, 0.0};
-	obj->is_mov = 1;
+	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 20.0, 0.0}, &plane_de);
 	obj->color = (t_vec3){0.0, 0.0, 1.0};
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &plane_de);
+	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 20.0}, &plane_de);
 	obj->normal = (t_vec3){0.0, 0.0, 1.0};
-	obj->transform.mov = (t_vec3){0.0, 0.0, 20.0};
-	obj->is_mov = 1;
 	obj->color = (t_vec3){1.0, 0.0, 0.0};
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &plane_de);
+	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, -10.0}, &plane_de);
 	obj->normal = (t_vec3){0.0, 0.0, 1.0};
-	obj->transform.mov = (t_vec3){0.0, 0.0, -10.0};
-	obj->is_mov = 1;
 	obj->color = (t_vec3){1.0, 1.0, 0.0};
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &plane_de);
+	obj = scene_add_obj(&ml->scene, (t_vec3){20.0, 0.0, 0.0}, &plane_de);
 	obj->normal = (t_vec3){1.0, 0.0, 0.0};
 	obj->color = (t_vec3){0.0, 1.0, 0.0};
-	obj->transform.mov = (t_vec3){20.0, 0.0, 0.0};
-	obj->is_mov = 1;
-	obj = scene_add_obj(&ml->scene, (t_vec3){0.0, 0.0, 0.0}, &plane_de);
+	obj = scene_add_obj(&ml->scene, (t_vec3){-20.0, 0.0, 0.0}, &plane_de);
 	obj->color = (t_vec3){1.0, 0.0, 1.0};
 	obj->normal = (t_vec3){1.0, 0.0, 0.0};
-	obj->transform.mov = (t_vec3){-20.0, 0.0, 0.0};
-	obj->is_mov = 1;
 }
-*/
 
+/*
 static void	init(t_mymlx *ml)
 {
 	t_object	*obj;
@@ -159,6 +140,7 @@ static void	init(t_mymlx *ml)
 	obj->color = (t_vec3){1.0, 0.0, 1.0};
 	obj->normal = (t_vec3){1.0, 0.0, 0.0};
 }
+*/
 
 /*
 static void	init(t_mymlx *ml)
