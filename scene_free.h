@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   scene_free.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/24 14:28:49 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/08 13:55:33 by trobicho         ###   ########.fr       */
+/*   Created: 2019/05/08 08:18:48 by trobicho          #+#    #+#             */
+/*   Updated: 2019/05/08 08:28:42 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#ifndef SCENE_FREE_H
+# define SCENE_FREE_H
 
-# include "init_mlx.h"
 # include "scene.h"
 
-typedef struct	s_ray_inf
-{
-	t_vec3		r_o;
-	t_vec3		r_d;
-	t_vec3		p;
-	double		d;
-	t_object	*obj_min;
-}				t_ray_inf;
-
-int				ray_loop(void *param);
-void			ray_scan_hor(t_mymlx *ml, int y);
+void	scene_free(t_scene *scene);
 #endif

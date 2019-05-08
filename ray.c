@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:18:54 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/05 04:10:06 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/08 21:32:59 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,6 @@
 #include "marching.h"
 #include "ray.h"
 #include "light.h"
-
-int				ray_loop(void *param)
-{
-	t_mymlx		*ml;
-	static int	finish = 0;
-
-	ml = (t_mymlx*)param;
-	if (ml->ray_w == 1 && finish)
-		return (0);
-	else
-	{
-		finish = 0;
-		ray_scan(ml);
-		mlx_put_image_to_window(ml->mlx_ptr, ml->win_ptr, ml->img_ptr, 0, 0);
-		if (ml->ray_w > 1)
-			ml->ray_w /= 2;
-		else
-		{
-			finish = 1;
-		}
-	}
-	return (0);
-}
 
 static t_vec3	pixel_to_ray(t_mymlx *ml, int x, int y)
 {
@@ -57,26 +34,20 @@ static t_vec3	pixel_to_ray(t_mymlx *ml, int x, int y)
 	return (vec_normalize(r));
 }
 
-void			ray_scan(t_mymlx *ml)
+void			ray_scan_hor(t_mymlx *ml, int y)
 {
 	int				x;
-	int				y;
 	t_vec3			color;
 	unsigned int	col;
 	t_ray_inf		ray;
 
 	ray.r_o = ml->cam.pos;
-	y = 0;
-	while (y < ml->h)
+	x = 0;
+	while (x < ml->w)
 	{
-		x = 0;
-		while (x < ml->w)
-		{
-			ray.r_d = pixel_to_ray(ml, x, ml->h - y);
-			color = get_color(&ml->scene, ray, 5);
-			putpixel_vec_w(ml, x, y, ml->ray_w, color);
-			x += ml->ray_w;
-		}
-		y += ml->ray_w;
+		ray.r_d = pixel_to_ray(ml, x, ml->h - y);
+		color = get_color(&ml->scene, ray, 10);
+		putpixel_vec_w(ml, x, y, ml->ray_w, color);
+		x += ml->ray_w;
 	}
 }

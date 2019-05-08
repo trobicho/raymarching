@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 22:15:24 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/06 04:57:40 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/08 21:26:12 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ double	mandelbulb_de(t_object *obj, t_vec3 v)
 	w = v;
 	r = w.x * w.x + w.y * w.y + w.z * w.z;
 	i = 0;
-	while (i < 25)
+	while (i < 30)
 	{
 		dr = 8.0 * sqrt(r * r * r * r * r * r * r) * dr + 1.0;
 		z = w;
@@ -132,7 +132,7 @@ double	sierpinski_de(t_object *obj, t_vec3 v)
 	double	offset = 1.0;
 
 	n = 0;
-	while (n < 2)
+	while (n < 5)
 	{
 		if (v.x + v.y < 0)
 			v = (t_vec3){-v.y, -v.x, v.z};

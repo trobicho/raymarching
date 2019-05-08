@@ -6,18 +6,22 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 01:41:03 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/02 19:54:11 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/08 19:45:26 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 #include "camera.h"
 #include "init_mlx.h"
+#include "render.h"
 
 int			closer(void *param)
 {
-	(void *)param;
-	//free_mlx(ml);
+	t_mymlx	*ml;
+
+	ml = (t_mymlx*)param;
+	render_close(ml);
+	free_mlx(ml);
 	exit(0);
 	return (0);
 }
@@ -65,6 +69,6 @@ int			key_hook(int keycode, void *param)
 		ml->normal_disp = 1 - ml->normal_disp;
 	else if (key_cam(ml, keycode) == 0)
 		return (0);
-	ml->ray_w = 16;
+	ml->update = 1;
 	return (1);
 }
