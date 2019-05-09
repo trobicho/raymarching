@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 02:04:03 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/04 20:57:50 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/09 18:59:03 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_quaternion	quat_conjug(t_quaternion q)
 
 t_quaternion	quat_mul(t_quaternion q1, t_quaternion q2)
 {
-	t_quaternion qr;
+	t_quaternion	qr;
 
 	qr.x = q1.w * q2.x + q1.x * q2.w + q1.y * q2.z - q1.z * q2.y;
 	qr.y = q1.w * q2.y - q1.x * q2.z + q1.y * q2.w + q1.z * q2.x;

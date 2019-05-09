@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 01:58:53 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/06 03:37:26 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/09 23:21:57 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "vector.h"
 #include "scene.h"
 #include "operator.h"
+#include "quaternion.h"
 
 #include "de.h"
 #include "transform.h"
@@ -52,11 +53,12 @@ static void	l_obj_init_elem(t_list_obj *l, t_vec3 pos, t_sdf_f sdf)
 	l->obj.normal = (t_vec3){0.0, 1.0, 0.0};
 	l->obj.spec = 1.0;
 	l->obj.ks = 0.0;
-	l->obj.rotate = (t_quaternion){0.0, 0.0, 0.0, 1.0},
+	l->obj.rotate = (t_quaternion){0.0, 0.0, 0.0, 1.0};
 	l->obj.is_rot = 0;
 	l->obj.b_sphere_r = 0.0;
 	l->obj.mirror = 0.0;
 	l->obj.csg = NULL;
+	l->obj.scale = 1.0;
 }
 
 void		init_obj(t_object *obj, t_vec3 pos, t_sdf_f sdf)
@@ -67,11 +69,12 @@ void		init_obj(t_object *obj, t_vec3 pos, t_sdf_f sdf)
 	obj->normal = (t_vec3){0.0, 1.0, 0.0};
 	obj->spec = 1.0;
 	obj->ks = 0.0;
-	obj->rotate = (t_quaternion){0.0, 0.0, 0.0, 1.0},
+	obj->rotate = (t_quaternion){0.0, 0.0, 0.0, 1.0};
 	obj->is_rot = 0;
 	obj->b_sphere_r = 0.0;
 	obj->mirror = 0.0;
 	obj->csg = NULL;
+	obj->scale = 1.0;
 }
 
 t_object	*scene_add_obj(t_scene *scene, t_vec3 pos, t_sdf_f sdf)
@@ -88,7 +91,7 @@ t_object	*scene_add_obj(t_scene *scene, t_vec3 pos, t_sdf_f sdf)
 	list = scene->l_obj;
 	while (list->next != NULL)
 		list = list->next;
-	if ((list->next = (t_list_obj*)malloc(sizeof(t_list_obj))) == NULL) //free
+	if ((list->next = (t_list_obj*)malloc(sizeof(t_list_obj))) == NULL)
 		return (NULL);
 	l_obj_init_elem(list->next, pos, sdf);
 	return (&list->next->obj);
@@ -112,7 +115,7 @@ t_light		*scene_add_light(t_scene *scene, t_vec3 pos, double intensity)
 	list = scene->l_light;
 	while (list->next != NULL)
 		list = list->next;
-	if ((list->next = (t_list_light*)malloc(sizeof(t_list_light))) == NULL) //free
+	if ((list->next = (t_list_light*)malloc(sizeof(t_list_light))) == NULL)
 		return (NULL);
 	list->next->next = NULL;
 	list->next->light = (t_light){pos, color, intensity};

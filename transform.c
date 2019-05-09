@@ -6,19 +6,19 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 23:12:51 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/06 00:08:39 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/09 23:22:31 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "transform.h"
 #include "scene.h"
 #include "vector.h"
+#include <math.h>
 
 double	op_transform(t_object *obj, t_vec3 p)
 {
 	t_quaternion	p_t;
 	t_quaternion	q;
-	t_object		s_obj;
 	double			r;
 
 	q = obj->rotate;
@@ -31,7 +31,14 @@ double	op_transform(t_object *obj, t_vec3 p)
 		p_t = quat_mul(quat_mul(q, p_t), quat_conjug(q));
 		p = (t_vec3){p_t.x, p_t.y, p_t.z};
 	}
+	if (obj->scale != 1.0 && obj->scale != 0.0)
+		return (op_scale(obj, p));
 	return (obj->sdf(obj, p));
+}
+
+double	op_scale(t_object *obj, t_vec3 p)
+{
+	return (obj->sdf(obj, vec_scalar(p, 1.0 / obj->scale)) * obj->scale);
 }
 
 void	calc_transform(t_object *obj, double ax, double ay, double az)
@@ -40,9 +47,9 @@ void	calc_transform(t_object *obj, double ax, double ay, double az)
 	t_quaternion	qy;
 	t_quaternion	qz;
 
-	ax *= D_PI / 180.0;
-	ay *= D_PI / 180.0;
-	az *= D_PI / 180.0;
+	ax *= M_PI / 180.0;
+	ay *= M_PI / 180.0;
+	az *= M_PI / 180.0;
 	qx.x = sin(-ax / 2.0);
 	qx.y = 0.0;
 	qx.z = 0.0;

@@ -1,22 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform.h                                        :+:      :+:    :+:   */
+/*   marching_enh.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/02 23:11:43 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/09 23:20:02 by trobicho         ###   ########.fr       */
+/*   Created: 2019/05/09 15:50:34 by trobicho          #+#    #+#             */
+/*   Updated: 2019/05/09 15:50:59 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TRANSFORM_H
-# define TRANSFORM_H
-
-# include "quaternion.h"
-# include "scene.h"
-
-double	op_transform(t_object *obj, t_vec3 p);
-double	op_scale(t_object *obj, t_vec3 p);
-void	calc_transform(t_object *obj, double ax, double ay, double az);
-#endif
+double	marching_enh(t_scene *scene, t_vec3 ray_o, t_vec3 ray_d, t_object **obj_min);
