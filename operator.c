@@ -5,41 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/30 13:40:46 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/06 03:38:24 by trobicho         ###   ########.fr       */
+/*   Created: 2019/05/10 11:49:54 by trobicho          #+#    #+#             */
+/*   Updated: 2019/05/10 14:19:52 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
 #include "transform.h"
+#include "scene.h"
+#include "vector.h"
 #include <math.h>
 
-double	csg_union(t_object *obj, t_vec3 p)
+double	op_twist(t_object *obj, t_vec3 p)
 {
-	double	d1;
-	double	d2;
+	double	c;
+	double	s;
+	t_vec3	q;
 
-	d1 = op_transform(&obj->csg->o1, p);
-	d2 = op_transform(&obj->csg->o2, p);
-	return (fmin(d1, d2));
-}
-
-double	csg_sub(t_object *obj, t_vec3 p)
-{
-	double	d1;
-	double	d2;
-
-	d1 = op_transform(&obj->csg->o1, p);
-	d2 = op_transform(&obj->csg->o2, p);
-	return (fmax(d1, -d2));
-}
-
-double	csg_intersect(t_object *obj, t_vec3 p)
-{
-	double	d1;
-	double	d2;
-
-	d1 = op_transform(&obj->csg->o1, p);
-	d2 = op_transform(&obj->csg->o2, p);
-	return (fmax(d1, d2));
+	if (obj->twist_factor == 0.0)
+		return (obj->sdf(obj, p));
+	c = cos(obj->twist_factor * p.x);
+	s = sin(obj->twist_factor * p.x);
+	q.x = p.x;
+	q.y = c * p.y + -s * p.z;
+	q.z = s * p.y + c * p.z;
+	return (obj->sdf(obj, q));
 }

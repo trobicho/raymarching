@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 01:57:22 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/09 23:21:36 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/10 20:17:05 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ typedef struct				s_light
 	double	intensity;
 }							t_light;
 
+typedef struct s_object		t_object;
 
-typedef struct	s_object	t_object;
+typedef double				(*t_sdf_f)(struct s_object *object, t_vec3 p);
 
-typedef double	(*t_sdf_f)(struct s_object *object, t_vec3 p);
-
-typedef	struct	s_csg		t_csg;
+typedef	struct s_csg		t_csg;
 
 struct						s_object
 {
@@ -47,6 +46,7 @@ struct						s_object
 	t_csg			*csg;
 	int				is_rot;
 	double			b_sphere_r;
+	double			twist_factor;
 };
 
 struct						s_csg
@@ -55,17 +55,16 @@ struct						s_csg
 	t_object	o2;
 };
 
-
 typedef struct				s_list_obj
 {
-	t_object			obj;
-	struct	s_list_obj	*next;
+	t_object				obj;
+	struct s_list_obj		*next;
 }							t_list_obj;
 
 typedef struct				s_list_light
 {
 	t_light					light;
-	struct	s_list_light	*next;
+	struct s_list_light		*next;
 }							t_list_light;
 
 typedef struct				s_scene
@@ -80,7 +79,7 @@ double						scene_get_dist(t_scene *scene, t_vec3 v
 t_object					*scene_add_obj(t_scene *scene, t_vec3 pos
 	, t_sdf_f sdf);
 t_light						*scene_add_light(t_scene *scene, t_vec3 pos
-	, double intensity);
+	, double intensity, t_vec3 color);
 void						init_obj(t_object *obj, t_vec3 pos
 	, t_sdf_f sdf);
 #endif

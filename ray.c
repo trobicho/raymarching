@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:18:54 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/09 23:24:46 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/10 15:46:16 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void			ray_scan_hor(t_mymlx *ml, int y)
 	while (x < ml->w)
 	{
 		ray.r_d = pixel_to_ray(ml, x, ml->h - y);
-		ml->scene.l_light->light.pos = ml->cam.pos;
 		color = get_color(&ml->scene, ray, 5);
 		putpixel_vec_w(ml, x, y, ml->ray_w, color);
 		x += ml->ray_w;

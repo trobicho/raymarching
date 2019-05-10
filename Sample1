@@ -1,0 +1,27 @@
+Scene
+{
+	Camera
+	{
+		origin : (0, 0, 0)
+		up : (0, 1, 0)
+		direction : (1, 0, 0)
+		screen : (1024, 1024)
+		right : (0, 0, 1)
+	}
+	light
+	{
+		origin : (0, -100, 0)
+		intensity : 10000
+	}
+
+# objects
+	object
+	{
+		name : Sphere
+		position : (5, 0, 0)
+		reflection : 1
+		Specular : 0.05
+		radius : 0.75
+		color : 0xFF00FF
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 23:11:43 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/09 23:20:02 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/10 11:59:14 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 
 double	op_transform(t_object *obj, t_vec3 p);
 double	op_scale(t_object *obj, t_vec3 p);
+double	op_twist(t_object *obj, t_vec3 p);
 void	calc_transform(t_object *obj, double ax, double ay, double az);
 #endif

@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 01:58:53 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/09 23:21:57 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/10 20:15:27 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <math.h>
 #include "vector.h"
 #include "scene.h"
-#include "operator.h"
+#include "csg.h"
 #include "quaternion.h"
 
 #include "de.h"
@@ -59,6 +59,7 @@ static void	l_obj_init_elem(t_list_obj *l, t_vec3 pos, t_sdf_f sdf)
 	l->obj.mirror = 0.0;
 	l->obj.csg = NULL;
 	l->obj.scale = 1.0;
+	l->obj.twist_factor = 0.0;
 }
 
 void		init_obj(t_object *obj, t_vec3 pos, t_sdf_f sdf)
@@ -75,6 +76,7 @@ void		init_obj(t_object *obj, t_vec3 pos, t_sdf_f sdf)
 	obj->mirror = 0.0;
 	obj->csg = NULL;
 	obj->scale = 1.0;
+	obj->twist_factor = 0.0;
 }
 
 t_object	*scene_add_obj(t_scene *scene, t_vec3 pos, t_sdf_f sdf)
@@ -97,12 +99,11 @@ t_object	*scene_add_obj(t_scene *scene, t_vec3 pos, t_sdf_f sdf)
 	return (&list->next->obj);
 }
 
-t_light		*scene_add_light(t_scene *scene, t_vec3 pos, double intensity)
+t_light		*scene_add_light(t_scene *scene, t_vec3 pos\
+		, double intensity, t_vec3 color)
 {
 	t_list_light	*list;
-	t_vec3			color;
 
-	color = (t_vec3){1.0, 1.0, 1.0};
 	if (scene->l_light == NULL)
 	{
 		scene->l_light = (t_list_light*)malloc(sizeof(t_list_light));

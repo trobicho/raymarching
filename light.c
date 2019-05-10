@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 16:23:41 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/09 22:34:39 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/10 20:45:13 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "scene.h"
 #include "marching.h"
 #include "light.h"
+#include "transform.h"
 
 static t_vec3	get_bg_color(t_ray_inf ray)
 {
@@ -62,8 +63,8 @@ t_vec3	get_color(t_scene *scene, t_ray_inf ray, int rebound)
 		if (ray.obj_min->mirror > 0.0)
 		{
 			ray.r_o = vec_add(ray.r_o, vec_scalar(ray.r_d, ray.d));
-			ray.r_d = vec_reflect(ray.r_d, get_normal(scene, ray.p));
-			ray.r_o = vec_add(ray.r_o, vec_scalar(ray.r_d, DIST_MIN * 10.0));
+			ray.r_d = vec_reflect(ray.r_d, get_normal(ray));
+			ray.r_o = vec_add(ray.r_o, vec_scalar(ray.r_d, 10 * DIST_MIN));
 			color_reflect = vec_scalar(get_color(scene, ray, rebound - 1), ray.obj_min->mirror);
 			color = vec_scalar(color, 1.0 - ray.obj_min->mirror);
 			color_tot = (vec_add(color, color_reflect));
@@ -96,13 +97,13 @@ t_vec3	light_calc(t_scene *scene, t_ray_inf ray)
 		d_l = vec_normalize(vec_sub(light.pos, ray.p));
 		d_l2 = vec_norme(vec_sub(light.pos, ray.p));
 		d_l2 *= d_l2;
-		n = get_normal(scene, ray.p);
+		n = get_normal(ray);
 		diffuse = (t_vec3){0.0, 0.0, 0.0};
 		if ((vd = vec_dot(d_l, n)) > 0.0)
 			diffuse = vec_scalar(vec_mul(light.color, ray.obj_min->color), vd);
 		spec = vec_scalar(get_phong(&light, ray, d_l, n), ray.obj_min->ks);
-		d = marching(scene, vec_add(ray.p , vec_scalar(n, DIST_MIN * 10)), d_l, NULL);
-		d += DIST_MIN * 10;
+		d = marching(scene, vec_add(ray.p , vec_scalar(n, 10 * DIST_MIN)), d_l, NULL);
+		d += 10 * DIST_MIN;
 		if (d < vec_norme(vec_sub(light.pos, ray.p))) 
 		{
 			diffuse = (t_vec3){0.0, 0.0, 0.0};
@@ -118,17 +119,19 @@ t_vec3	light_calc(t_scene *scene, t_ray_inf ray)
 	return (color);
 }
 
-t_vec3	get_normal(t_scene *scene, t_vec3 p) //obj direct
+#include <stdio.h>
+
+t_vec3	get_normal(t_ray_inf ray)
 {
 	double	d;
 	double	epsi;
 	t_vec3	n;
 
 	epsi = DIST_MIN / 2.0;
-	d = scene_get_dist(scene, p, NULL);
-	n = (t_vec3){d - scene_get_dist(scene, (t_vec3){p.x - epsi, p.y, p.z}, NULL)
-		, d - scene_get_dist(scene, (t_vec3){p.x, p.y - epsi,  p.z}, NULL)
-			, d - scene_get_dist(scene, (t_vec3){p.x, p.y, p.z - epsi}, NULL)};
+	d = op_transform(ray.obj_min, ray.p);
+	n = (t_vec3){d - op_transform(ray.obj_min, (t_vec3){ray.p.x - epsi, ray.p.y, ray.p.z})
+		, d - op_transform(ray.obj_min, (t_vec3){ray.p.x, ray.p.y - epsi,  ray.p.z})
+			, d - op_transform(ray.obj_min, (t_vec3){ray.p.x, ray.p.y, ray.p.z - epsi})};
 	n = vec_normalize(n);
 	return (n);
 }
