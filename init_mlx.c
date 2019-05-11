@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:48:49 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/10 15:48:03 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/12 01:08:44 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	free_mlx(t_mymlx *ml)
 	scene_free(&ml->scene);
 }
 
-int			ft_init(t_mymlx *init)
+int		ft_init(t_mymlx *init)
 {
 	if (!init || !(init->mlx_ptr = mlx_init()))
 		return (0);
@@ -37,7 +37,7 @@ int			ft_init(t_mymlx *init)
 	return (1);
 }
 
-int			ft_create_window(t_mymlx *init, int w, int h, char *name)
+int		ft_create_window(t_mymlx *init, int w, int h, char *name)
 {
 	char		*str;
 

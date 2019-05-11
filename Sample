@@ -8,15 +8,15 @@ Scene
 	{
 		origin : (0, 0, 0)
 		up : (0, 1, 0)
-		direction : (1, 0, 0)
-		screen : (1024, 1024)
+		direction : (50, 0, 0)
+		screen : (200, 1000)
 		right : (0, 0, -1)
 		ambient : 0
 	}
 	light
 	{
-		origin : (0, 0, 0)
-		intensity : 50
+		origin : (0, 100, 0)
+		intensity : 10000
 		color : 0xFFFF00
 	}
 
@@ -25,8 +25,8 @@ Scene
 	{
 		name : Sphere
 		position : (5, 0, 0)
-		reflection : -10
 		Specular : 0.05
+		reflection : 10000
 		radius : 0.75
 		transform
 		{
@@ -38,15 +38,15 @@ Scene
 	{
 		name : Torus
 		position : (0, 2, 0)
-		Specular : 0.06
-		reflection : 3000.3
+		Specular : 1000
+		ks : 0.4
 		radius : (1, 0.25)
 		transform
 		{
 			translate : (5, 0, 0)
 			rotate : (33, 33, 0)
 		}
-		color : 0xD01F39
+		color : 0xD00D00
 	}
 	object
 	{
@@ -57,21 +57,21 @@ Scene
 	object
 	{
 		name : Plane
-		position : (6, 0, 0)
+		position : (100, 0, 0)
 		normal : (-1, 0, 0)
 		color : 0x00AFFF
 	}
 	object
 	{
 		name : Plane
-		position : (0, -3, 0)
+		position : (0, -100, 0)
 		normal : (0, 1, 0)
 		color : 0xF00FF0
 	}
 	object
 	{
 		name : Plane
-		position : (-20, 0, 0)
+		position : (-100, 0, 0)
 		normal : (1, 0, 0)
 		color : 0x3BCD8C
 	}
@@ -81,5 +81,17 @@ Scene
 #		position : (10, 0, 0)
 #		color : 0x0FF00A
 #	}
+	light
+	{
+		origin : (5, 0, -5)
+		intensity : 50
+		color : 0xFFFFFF
+	}
+	light
+	{
+		origin : (5, 0, 5)
+		intensity : 50
+		color : 0xFFFFFF
+	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 17:35:29 by dkhatri           #+#    #+#             */
-/*   Updated: 2019/05/10 19:38:54 by dkhatri          ###   ########.fr       */
+/*   Updated: 2019/05/11 03:05:51 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,12 @@ int				ft_process_strarr(char **str, char *s1, int num);
 
 int				ft_col_to_int(char *hex, int *col);
 int				ft_parse_common(char *line, t_object *obj, char *name);
+int				ft_parse_common2(char *line, t_object *obj, char *name);
 int				ft_parse_hex(char **s, t_vec3 *val);
 double			ft_atof(char *s);
+void			ft_clamp(double *d, double start, double end);
+void			ft_normalize_cam_ele(t_cam *cam, t_scene *s);
+int				ft_normalize_obj_ele(t_object *obj);
+int				ft_compute_radius(char *line, char *name, t_object *obj);
 
 #endif

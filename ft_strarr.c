@@ -6,13 +6,13 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 17:29:48 by dkhatri           #+#    #+#             */
-/*   Updated: 2019/05/10 17:45:36 by dkhatri          ###   ########.fr       */
+/*   Updated: 2019/05/11 02:37:55 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int				ft_strarrlen(char **s)
+int			ft_strarrlen(char **s)
 {
 	int			len;
 

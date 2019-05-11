@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 16:43:02 by dkhatri           #+#    #+#             */
-/*   Updated: 2019/05/10 20:08:03 by dkhatri          ###   ########.fr       */
+/*   Updated: 2019/05/11 03:06:07 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int			ft_parse_cam(const int fd, t_mymlx *ml)
 	if (!ft_create_window(ml, dim.x, dim.y, s & 0b0001 ? name : 0) \
 			|| (s & 0b0001 && ft_strcmp_rm(name, &name)))
 		return (-1);
+	ft_normalize_cam_ele(&(ml->cam), &(ml->scene));
 	return (1);
 }
 
@@ -73,6 +74,7 @@ int			ft_parse_light_ele(char *line, t_vec3 *pos, double *d, t_vec3 *col)
 {
 	int			ret;
 
+	ret = 0;
 	if (!ft_strncmp("origin", line, 6))
 		return ((ret = ft_parse_3points("origin", line, pos)) < 1 \
 				? ret : 0b001);
@@ -82,8 +84,9 @@ int			ft_parse_light_ele(char *line, t_vec3 *pos, double *d, t_vec3 *col)
 	else if (!ft_strncmp("color", line, 5))
 		return ((ret = ft_parse_1point("color", line, 1, col)) < 1 \
 				? ret : 0b100);
-	else
+	else if (!ret)
 		return (0);
+	return (1);
 }
 
 int			ft_parse_light(const int fd, t_mymlx *ml, int ret)
@@ -109,5 +112,6 @@ int			ft_parse_light(const int fd, t_mymlx *ml, int ret)
 	if (ret < 1 || (s & 0b011) != 0b011 \
 			|| !scene_add_light(&(ml->scene), pos, d, col))
 		return (ret == 1 ? -1 : ret);
+	ft_strdel(&line);
 	return (1);
 }
