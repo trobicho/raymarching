@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 22:15:24 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/09 19:18:43 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/12 17:08:53 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@ double	cylinder_de(t_object *obj, t_vec3 p)
 {
 	p.y = 0.0;
 	return (vec_norme(p) - obj->radius);
+}
+
+double	capped_cylinder_de(t_object *obj, t_vec3 p)
+{
+	double		t;
+	double		d;
+
+	t = vec_norme((t_vec3){p.x, 0, p.z}) - obj->radius;
+	d = fabs(p.y) - obj->len;
+	return (fmax(t, d));
 }
 
 double	plane_de(t_object *obj, t_vec3 p)

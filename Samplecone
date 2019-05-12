@@ -1,0 +1,40 @@
+Scene
+{
+	Camera
+	{
+		origin : (0, 0, 0)
+		up : (0, 1, 0)
+		direction : (0, 0, 1)
+		screen : (1024, 1024)
+		right : (1, 0, 0)
+		ambient : 0
+	}
+	light
+	{
+		origin : (0, 80, 20)
+		intensity : 15000
+		color : 0x00FF00
+	}
+	light
+	{
+		origin : (10, 80, 0)
+		intensity : 15000
+		color : 0xFF0000
+	}
+	light
+	{
+		origin : (-10, -80, 0)
+		intensity : 15000
+		color : 0x0000FF
+	}
+
+
+	object
+	{
+		name: cone
+		position : (0, 0, 100000)
+		Specular : 0.5
+		radius : 2.0
+		color : 0xFFFFFF
+	}
+}

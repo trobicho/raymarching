@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 16:13:26 by dkhatri           #+#    #+#             */
-/*   Updated: 2018/12/06 19:45:35 by dkhatri          ###   ########.fr       */
+/*   Updated: 2019/05/12 21:09:11 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static int		ft_find_line(const int fd, char *tmp, char **line, char **extra)
 
 	if ((result = ft_find_nl(tmp, line, extra)) != 0)
 		return (result);
-	buf = (char*)malloc(sizeof(char*) * (BUFF_SIZE + 1));
+	buf = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
 	result = read(fd, buf, BUFF_SIZE);
 	if (result < 1)
 	{

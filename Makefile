@@ -6,13 +6,12 @@
 #    By: trobicho <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/11 16:16:52 by trobicho          #+#    #+#              #
-#    Updated: 2019/05/11 23:49:39 by trobicho         ###   ########.fr        #
+#    Updated: 2019/05/12 20:41:45 by trobicho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
-#CFLAGS = -g
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 GNL = parse.c get_next_line.c parse_helper.c parse_cam.c parse_numbers.c parse_object.c ft_strarr.c ft_col_to_int.c parse_transform.c ft_atof.c ft_normalize_ele.c ft_clamp.c
 

@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 16:13:36 by dkhatri           #+#    #+#             */
-/*   Updated: 2019/05/10 17:22:00 by dkhatri          ###   ########.fr       */
+/*   Updated: 2019/05/12 21:07:34 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ double		ft_atof(char *s)
 	if (!*str || *str != '.')
 		return (sum_i);
 	ft_atof_i(str + 1, &sum_f, &j, 0);
-	sum_i = sum_i + (sum_f / pow(10, j));
+	sum_i = sum_i + ((sum_f / pow(10, j)) * (sum_i < 0 ? -1 : 1));
 	return (sum_i);
 }

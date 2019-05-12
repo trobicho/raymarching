@@ -6,12 +6,12 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:48:22 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/10 15:20:26 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/12 19:13:53 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_MLX
-# define INIT_MLX
+#ifndef INIT_MLX_H
+# define INIT_MLX_H
 
 # include "camera.h"
 # include "scene.h"
@@ -22,18 +22,15 @@ typedef enum			e_state
 	state_quit, state_draw, state_finish_frame, state_update, state_wait
 }						t_state;
 
-typedef struct	s_mymlx	t_mymlx;
-
 typedef struct			s_th_param
 {
 	t_state			state;
 	int				id;
-	t_mymlx			*ml;
+	struct s_mymlx	*ml;
 	pthread_mutex_t	mutex;
 	pthread_cond_t	cond;
 	pthread_mutex_t	mutex_cond;
 }						t_th_param;
-
 
 typedef struct			s_mymlx
 {
@@ -59,5 +56,6 @@ typedef struct			s_mymlx
 int						init_mlx(t_mymlx *init, int w, int h, char *name);
 void					free_mlx(t_mymlx *ml);
 int						ft_init(t_mymlx *init);
-int						ft_create_window(t_mymlx *init, int w, int h, char *name);
+int						ft_create_window(t_mymlx *init\
+		, int w, int h, char *name);
 #endif

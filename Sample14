@@ -1,0 +1,125 @@
+Scene
+{
+	camera
+	{
+		origin : (-29, 15, 25)
+		up : (0, 1, 0)
+		right : (0, 0, -1)
+		direction : (1, 0, 0)
+		screen : (1024, 1024)
+		ambient : 0.03
+	}
+	light
+	{
+		origin : (-29, 29, 29)
+		color : 0x0AB3C0
+		intensity : 2000
+	}
+	light
+	{
+		origin : (-29, 29, -29)
+		color : 0xC00AB3
+		intensity: 2000
+	}
+	light
+	{
+		origin: (29, 29, -29)
+		color: 0xA77BD4
+		intensity: 2000
+	}
+	light
+	{
+		origin: (29, 29, 29)
+		color: 0xB3C00A
+		intensity: 2000
+	}
+	object
+	{
+		name: plane
+		position: (0, 0, 0)
+		normal: (0, -1, 0)
+		reflection: 0.2
+		color: 0xAA00AA
+	}
+	object
+	{
+		name: plane
+		position: (0, 30, 0)
+		normal: (0, -1, 0)
+		reflection: 0.2
+		color: 0xAA00AA
+	}
+	object
+	{
+		name: plane
+		position: (0, 30, 30)
+		normal: (0, 0, 1)
+		reflection: 0.2
+		color: 0xAE7F0A
+	}
+	object
+	{
+		name: plane
+		position: (0, 30, -30)
+		normal: (0, 0, 1)
+		reflection: 0.2
+		color: 0xAE7F0A
+	}
+	object
+	{
+		name: plane
+		position: (30, 30, 0)
+		normal: (1, 0, 0)
+		reflection: 0.2
+		color: 0xAE7F0B
+	}
+	object
+	{
+		name: plane
+		position: (-30, 30, 0)
+		normal: (1, 0, 0)
+		reflection: 0.2
+		color: 0xAE7F0C
+	}
+	object
+	{
+		name: sphere
+		position: (0, 27, 8)
+		radius: 3
+		color: 0xFFFFFF
+	}
+	object
+	{
+		name: sphere
+		position: (-8, 15, 8)
+		radius: 2
+		color: 0x00FFFF
+	}
+	object
+	{
+		name: sphere
+		position: (8, 9, 8)
+		radius: 2
+		color: 0x00FFFF
+	}
+	object
+	{
+		name: torus
+		position: (19, 4, 0)
+		radius: (15, 4)
+		color: 0xA7AC38
+	}
+}
+
+#object
+#{
+#		name: cylinder
+#		position: (0, 0, 0)
+#		radius: 8
+#		transform
+#		{
+#			rotation: (90, 0, 0)
+#		}
+#		color = 0xFFFF00
+#		reflection: 0.5
+#	}

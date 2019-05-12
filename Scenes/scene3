@@ -1,0 +1,37 @@
+#
+# Scene3 : Cylinder with one spot
+#
+
+Scene
+{
+	Camera
+	{
+		origin : (0, 0, -10)
+		up : (0, 1, 0)
+		direction : (0, 0, 1)
+		right : (1, 0, 0)
+		screen : (1024, 1024)
+	}
+	light
+	{
+		origin : (0, 0, -10)
+		intensity : 1000
+	}
+	object
+	{
+		name : Plane
+		position : (0, -3, 0)
+		normal : (0, 1, 0)
+		color : 0xACACAC
+	}
+	object
+	{
+		name : Cone
+		position : (0, 0, 10)
+		Specular : 1000
+		ks : 0.1
+		radius : 1
+		length : 1
+		color : 0xCFF00F
+	}
+}

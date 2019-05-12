@@ -6,13 +6,13 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 07:40:38 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/27 11:15:38 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/12 19:10:02 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef QUATERNION_H
 # define QUATERNION_H
-#include "vector.h"
+# include "vector.h"
 
 typedef struct	s_quaternion
 {

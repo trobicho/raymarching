@@ -1,0 +1,78 @@
+#
+#Scene 4: Bit of everything
+#
+
+Scene
+{
+	Camera
+	{
+		up : (0, 1, 0)
+		right : (0, 0, -1)
+		direction : (1, 0, 0)
+		ambient : 0.1
+		origin : (-5, 0, 0)
+		screen : (1024, 1024)
+	}
+	light
+	{
+		origin : (1, 5, 4)
+		intensity : 100
+	}
+	object
+	{
+		name : Plane
+		position : (10, 0, 0)
+		normal : (-1, 0, 0)
+		color : 0x8C8C8C
+	}
+	object
+	{
+		name : Plane
+		position : (0, -2, 0)
+		normal : (0, 1, 0)
+		color : 0x3C9AFE
+	}
+	object
+	{
+		name : Cylinder
+		position : (5, 0, 0)
+		radius : 0.5
+		specular : 1000
+		ks : 0.3
+		transform
+		{
+			rotate : (33, 0, 0)
+		}
+		color : 0xBCCB1F
+	}
+	object
+	{
+		name : Capped Cone
+		position : (4, -1.0, 0)
+		radius : 1
+		length : 1.5
+		color : 0xCBBC1F
+	}
+	object
+	{
+		name : Cone
+		position : (5, 0, 0)
+		radius : 0.5
+		transform
+		{
+			translate : (0, 0, 2)
+			rotate : (-33, 0, 0)
+		}
+		length : 1
+		color : 0x1FBCCB
+	}
+	object
+	{
+		name : Sphere
+		position : (4, 0.5, 0)
+		radius : 1.5
+		ks : 0.05
+		specular : 100
+		color : 0xDC1345
+	}
+}

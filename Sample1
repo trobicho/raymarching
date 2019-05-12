@@ -15,15 +15,15 @@ Scene
 	}
 	light
 	{
-		origin : (0, 80, 10)
+		origin : (0, 80, 20)
 		intensity : 15000
-		color : 0xFF0000
+		color : 0x00FF00
 	}
 	light
 	{
 		origin : (10, 80, 0)
 		intensity : 15000
-		color : 0x00FF00
+		color : 0xFF0000
 	}
 	light
 	{
@@ -35,7 +35,7 @@ Scene
 
 	object
 	{
-		name : Sphere
+		name: Sphere
 		position : (5, 0, 0)
 		reflection : -10
 		Specular : 0.05
@@ -44,7 +44,7 @@ Scene
 		{
 			scale : 2
 		}
-		color : 0x00FF00
+		color : 0xFFFFFF
 	}
 	object
 	{
@@ -65,12 +65,18 @@ Scene
 		position : (-2, 0, 0)
 		color : 0xCF3AB3
 	}
+	light
+	{
+		origin : (-2, 0.5, 0)
+		intensity : 150
+		color : 0xFFFF00
+	}
 	object
 	{
 		name : Plane
 		position : (0, -1, 0)
 		normal : (0, 1, 0)
-		color : 0x00AFFF
+		color : 0xFFFFFF
 	}
 	object
 	{

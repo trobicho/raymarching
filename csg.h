@@ -6,12 +6,12 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 11:25:19 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/10 11:26:34 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/12 19:07:21 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CSG_H
-# define CSG_H 
+# define CSG_H
 
 # include "scene.h"
 

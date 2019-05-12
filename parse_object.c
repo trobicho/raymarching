@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:42:00 by dkhatri           #+#    #+#             */
-/*   Updated: 2019/05/12 01:06:33 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/12 18:25:38 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ int			ft_parse_obj_name(char *name, t_vec3 pos, \
 		p = &sierpinski_de;
 	else if (!ft_strcmp("cone", name))
 		p = &cone_de;
+	else if (!ft_strcmp("capped cone", name))
+		p = &capped_cone_de;
 	else if (!ft_strcmp("cylinder", name))
 		p = &cylinder_de;
+	else if (!ft_strcmp("capped cylinder", name))
+		p = &capped_cylinder_de;
 	else
 		return (0);
 	if (!(*obj = scene_add_obj(&(ml->scene), pos, p)))
@@ -49,7 +53,9 @@ int			ft_compute_radius(char *line, char *name, t_object *obj)
 	ret = 0;
 	b = 0;
 	if ((!ft_strcmp(name, "sphere") || !ft_strcmp(name, "cone") \
-				|| !ft_strcmp(name , "cylinder")) \
+				|| !ft_strcmp(name, "cylinder") \
+				|| !ft_strcmp(name, "capped cylinder") \
+				|| !ft_strcmp(name, "capped cone")) \
 			&& (ret = ft_parse_1point("radius", line, 0, &(obj->radius))) < 1)
 		return (ret);
 	else if (!ret && !ft_strcmp(name, "torus") \

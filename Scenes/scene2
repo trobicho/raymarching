@@ -1,0 +1,48 @@
+#
+# Scene 2: A sphere, three spot
+#
+
+Scene
+{
+	Camera
+	{
+		origin : (0, 0, 0)
+		up : (0, 1, 0)
+		direction : (1, 0, 0)
+		right : (0, 0, -1)
+		screen : (1024, 1024)
+		ambient : 0.00
+	}
+
+	light
+	{
+		origin : (4, 1, -2)
+		intensity : 25
+	}
+	light
+	{
+		origin : (5, 2, 0)
+		intensity : 25
+	}
+	light
+	{
+		origin : (4, 1, 2)
+		intensity : 25
+	}
+	object
+	{
+		name : Sphere
+		position : (5, 0, 0)
+		radius : 1.25
+		specular : 100
+		ks : 0.015
+		color : 0xCF3C1A
+	}
+	object
+	{
+		name : Plane
+		position : (5, -2, 0)
+		normal : (0, 1, 0)
+		color : 5C5C5C
+	}
+}

@@ -1,0 +1,48 @@
+#
+# Scene 1: A sphere, one spot
+#
+
+Scene
+{
+	Camera
+	{
+		origin : (0, 0, 0)
+		up : (0, 1, 0)
+		direction : (1, 0, 0)
+		right : (0, 0, -1)
+		ambient : 0.03
+		screen : (1024, 1024)
+	}
+
+#light
+	light
+	{
+		origin : (2, 4, -2)
+		intensity : 100
+	}
+
+#object
+	object
+	{
+		name : Sphere
+		position : (5, 0, 0)
+		radius : 0.5
+		ks : 0.05
+		specular : 100
+		color : 0xCF3C00
+	}
+	object
+	{
+		name : Plane
+		position : (6, 0, 0)
+		normal : (-1, 0, 0)
+		color : 0xBCBCBC
+	}
+	object
+	{
+		name : Plane
+		position : (0, -1, 0)
+		normal : (0, 1, 0)
+		color : 1A1A1A
+	}
+}

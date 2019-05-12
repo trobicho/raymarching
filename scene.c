@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 01:58:53 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/10 20:15:27 by dkhatri          ###   ########.fr       */
+/*   Updated: 2019/05/12 15:49:27 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static void	l_obj_init_elem(t_list_obj *l, t_vec3 pos, t_sdf_f sdf)
 	l->obj.csg = NULL;
 	l->obj.scale = 1.0;
 	l->obj.twist_factor = 0.0;
+	l->obj.len = 1.0;
 }
 
 void		init_obj(t_object *obj, t_vec3 pos, t_sdf_f sdf)
@@ -77,6 +78,7 @@ void		init_obj(t_object *obj, t_vec3 pos, t_sdf_f sdf)
 	obj->csg = NULL;
 	obj->scale = 1.0;
 	obj->twist_factor = 0.0;
+	obj->len = 1.0;
 }
 
 t_object	*scene_add_obj(t_scene *scene, t_vec3 pos, t_sdf_f sdf)
