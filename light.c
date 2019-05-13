@@ -6,14 +6,14 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 16:23:41 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/11 23:52:32 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/13 14:26:55 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include <stdlib.h>
 #include "scene.h"
-#include "marching.h"
+#include "tracing.h"
 #include "light.h"
 #include "vector.h"
 
@@ -25,7 +25,7 @@ t_vec3	get_color(t_scene *scene, t_ray_inf ray, int rebound)
 	color = vec_init(0.0, 0.0, 0.0);
 	if (rebound > 0)
 	{
-		ray.d = marching(scene, ray.r_o, ray.r_d, &ray.obj_min);
+		ray.d = tracing(scene, ray.r_o, ray.r_d, &ray.obj_min);
 		if (ray.d >= DIST_MAX)
 			return (get_bg_color(ray));
 		ray.p = vec_add(ray.r_o, vec_scalar(ray.r_d, ray.d));
@@ -63,7 +63,7 @@ t_vec3	light_one(t_scene *scene, t_ray_inf ray, t_light light)
 		return (vec_init(0.0, 0.0, 0.0));
 	l.spec = vec_scalar(get_phong(&light, ray, l.d_l, n), ray.obj_min->ks);
 	v = vec_add(ray.p, vec_scalar(n, 10 * DIST_MIN));
-	l.d = marching(scene, v, l.d_l, NULL);
+	l.d = tracing(scene, v, l.d_l, NULL);
 	l.d += 10 * DIST_MIN;
 	if (l.d < vec_norme(vec_sub(light.pos, ray.p)))
 	{

@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 16:13:26 by dkhatri           #+#    #+#             */
-/*   Updated: 2019/05/12 21:09:11 by dkhatri          ###   ########.fr       */
+/*   Updated: 2019/05/13 13:59:24 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,15 @@ static int		ft_find_nl(char *str, char **line, char **extra)
 	return (2);
 }
 
-static int		ft_find_line(const int fd, char *tmp, char **line, char **extra)
+static int		ft_find_line(const int fd, char *tmp, char **line, t_g_inf inf)
 {
 	int			result;
 	char		*buf;
 	char		*str;
 
-	if ((result = ft_find_nl(tmp, line, extra)) != 0)
+	if (inf.deep <= 0)
+		return (-1);
+	if ((result = ft_find_nl(tmp, line, inf.extra)) != 0)
 		return (result);
 	buf = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
 	result = read(fd, buf, BUFF_SIZE);
@@ -102,7 +104,8 @@ static int		ft_find_line(const int fd, char *tmp, char **line, char **extra)
 		return (-1);
 	free(buf);
 	free(tmp);
-	return (ft_find_line(fd, str, line, extra));
+	inf.deep -= 1;
+	return (ft_find_line(fd, str, line, inf));
 }
 
 int				get_next_line(const int fd, char **line)
@@ -111,7 +114,7 @@ int				get_next_line(const int fd, char **line)
 	t_list			*ele;
 	char			*str;
 	char			*extra;
-	int				result;
+	t_g_inf			inf;
 
 	if (fd < 0 || !line || read(fd, *line, 0) < 0)
 		return (-1);
@@ -120,15 +123,15 @@ int				get_next_line(const int fd, char **line)
 	ele = 0;
 	ele = ft_lstpluck(&head, fd);
 	str = ele ? (char*)ele->content : 0;
-	result = ft_find_line(fd, str ? str : 0, line, &extra);
+	inf.extra = &extra;
+	inf.deep = 1000;
+	inf.result = ft_find_line(fd, str ? str : 0, line, inf);
 	if (ele)
 		ft_lst(&head, &ele, 0, 0);
 	ele = 0;
-	if (result == -1)
-		return (-1);
-	if (result == 0)
-		return (0);
-	if (result == 2)
+	if (inf.result == 0 || inf.result == -1)
+		return (inf.result);
+	if (inf.result == 2)
 		if (!(ft_lst(&head, &ele, fd, extra)))
 			return (-1);
 	return (1);

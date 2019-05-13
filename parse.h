@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 17:35:29 by dkhatri           #+#    #+#             */
-/*   Updated: 2019/05/11 03:05:51 by dkhatri          ###   ########.fr       */
+/*   Updated: 2019/05/13 16:43:40 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int				ft_skip_comments(const int fd, char **line);
 int				ft_parse_cam(const int fd, t_mymlx *ml);
 int				ft_parse_light(const int fd, t_mymlx *ml, int ret);
 int				ft_parse_object(const int fd, t_mymlx *ml);
-int				ft_parse_transform(const int fd, t_object *obj);
+int				ft_parse_transform(const int fd, t_object *obj, char **name);
 
 int				ft_parse_3points(char *s1, char *line, t_vec3 *vec);
 int				ft_parse_2points(char *s1, char *line, t_vec2 *vec);
@@ -53,5 +53,9 @@ void			ft_clamp(double *d, double start, double end);
 void			ft_normalize_cam_ele(t_cam *cam, t_scene *s);
 int				ft_normalize_obj_ele(t_object *obj);
 int				ft_compute_radius(char *line, char *name, t_object *obj);
+int				ft_give_error(char **line, t_mymlx *ml, int ret);
+void			ft_del_scene(t_scene *s);
+void			ft_del_light(t_list_light **light);
+void			ft_del_obj(t_list_obj **obj);
 
 #endif

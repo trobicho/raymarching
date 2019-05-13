@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 23:48:25 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/11 23:52:27 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/13 14:29:06 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "vector.h"
 #include "ray.h"
 #include "transform.h"
-#include "marching.h"
+#include "tracing.h"
 
 t_vec3	get_bg_color(t_ray_inf ray)
 {

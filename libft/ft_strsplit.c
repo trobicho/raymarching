@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 14:56:07 by dkhatri           #+#    #+#             */
-/*   Updated: 2018/11/26 12:48:26 by dkhatri          ###   ########.fr       */
+/*   Updated: 2019/05/13 13:31:26 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char			**ft_strsplit(char const *s, char c)
 	while (*s == c)
 		s = s + 1;
 	len = ft_find_all_delimit(s, c);
-	arr = malloc(sizeof(char*) * (len + 1));
+	arr = (char**)malloc(sizeof(char*) * (len + 1));
 	if (!arr)
 		return (0);
 	if (len == 0)

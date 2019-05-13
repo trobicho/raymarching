@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:18:54 by trobicho          #+#    #+#             */
-/*   Updated: 2019/05/11 23:03:57 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/05/13 14:26:36 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "vector.h"
 #include "mlx.h"
 #include "pixel.h"
-#include "marching.h"
 #include "ray.h"
 #include "light.h"
 

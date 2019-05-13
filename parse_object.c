@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 16:42:00 by dkhatri           #+#    #+#             */
-/*   Updated: 2019/05/12 18:25:38 by dkhatri          ###   ########.fr       */
+/*   Updated: 2019/05/13 16:43:59 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,14 @@ int			ft_parse_obj_np(const int fd, char **name, t_vec3 *pos)
 	int			ret;
 	char		*line;
 
+	*name = 0;
 	if ((ret = ft_skip_comments(fd, &line)) < 1 || ft_strncmp("name", line, 4) \
 			|| (ret = ft_parse_string("name", &line, name)) < 1)
-		return (ret == 1 ? 0 : ret);
+		return (ft_give_error(&line, 0, ret == 1 ? 0 : ret));
 	if ((ret = ft_skip_comments(fd, &line)) < 1 \
 			|| ft_strncmp("position", line, 8) \
 			|| (ret = ft_parse_3points("position", line, pos)) < 1)
-		return (ret == 1 ? 0 : ret);
+		return (ft_give_error(&line, 0, ret == 1 ? 0 : ret));
 	ft_strdel(&line);
 	return (1);
 }
@@ -93,18 +94,18 @@ int			ft_parse_object(const int fd, t_mymlx *ml)
 	t_object	*obj;
 
 	if ((ret = ft_process_line(fd, &line)) < 1 || ft_strcmp_rm("{", &line))
-		return (ret == 1 ? 0 : ret);
+		return (ft_give_error(&line, ml, ret == 1 ? 0 : ret));
 	if ((ret = ft_parse_obj_np(fd, &name, &pos)) < 1 \
 			|| (ret = ft_parse_obj_name(name, pos, ml, &obj)) < 1)
-		return (ret);
+		return (ft_give_error(&name, ml, ret));
 	while ((ret = ft_skip_comments(fd, &line)) > 0 && ft_strcmp("}", line))
 	{
 		ret = 0;
 		if (!ft_strcmp(line, "transform") \
-				&& (ret = ft_parse_transform(fd, obj)) < 1)
-			return (ret);
+				&& ((ret = ft_parse_transform(fd, obj, &name)) < 1))
+			return (ft_give_error(&line, ml, ret));
 		else if (!ret && (ret = ft_parse_common(line, obj, name)) < 1)
-			return (ret);
+			return (ft_give_error(&line, ml, ret));
 		free(line);
 	}
 	if (ret == 1 && !ft_strcmp_rm("}", &line) \

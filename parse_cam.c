@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 16:43:02 by dkhatri           #+#    #+#             */
-/*   Updated: 2019/05/11 03:06:07 by dkhatri          ###   ########.fr       */
+/*   Updated: 2019/05/13 16:04:59 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ int			ft_parse_cam(const int fd, t_mymlx *ml)
 	int			s;
 
 	if ((ret = ft_process_line(fd, &line)) < 1 || ft_strcmp_rm("{", &line))
-		return (ret < 1 ? ret : 0);
+		return (ft_give_error(&line, 0, ret < 1 ? ret : 0));
 	s = 0;
 	while ((ret = ft_skip_comments(fd, &line)) > 0 && ft_strcmp("}", line))
 	{
 		ret = ft_parse_cam_ele(&line, ml, &name, &dim);
 		if (ret < 1 || (s & ret) || !(s = s | ret))
-			return (ret < 1 ? ret : 0);
+			return (ft_give_error(&line, ml, ret < 1 ? ret : 0));
 		if (line)
 			free(line);
 	}
@@ -65,7 +65,7 @@ int			ft_parse_cam(const int fd, t_mymlx *ml)
 	ft_strcmp_rm(line, &line);
 	if (!ft_create_window(ml, dim.x, dim.y, s & 0b0001 ? name : 0) \
 			|| (s & 0b0001 && ft_strcmp_rm(name, &name)))
-		return (-1);
+		return (ft_give_error(s & 0b0001 ? &name : 0, 0, -1));
 	ft_normalize_cam_ele(&(ml->cam), &(ml->scene));
 	return (1);
 }
@@ -105,13 +105,13 @@ int			ft_parse_light(const int fd, t_mymlx *ml, int ret)
 	while ((ret = ft_skip_comments(fd, &line)) > 0 && ft_strcmp("}", line))
 	{
 		if ((ret = ft_parse_light_ele(line, &pos, &d, &col)) < 1 || s & ret)
-			return (ret == 1 ? 0 : ret);
+			return (ft_give_error(&line, ml, ret == 1 ? 0 : ret));
 		s = s | ret;
 		ft_strdel(&line);
 	}
 	if (ret < 1 || (s & 0b011) != 0b011 \
 			|| !scene_add_light(&(ml->scene), pos, d, col))
-		return (ret == 1 ? -1 : ret);
+		return (ft_give_error(ret == 1 ? &line : 0, ml, ret == 1 ? -1 : ret));
 	ft_strdel(&line);
 	return (1);
 }

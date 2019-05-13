@@ -1,0 +1,116 @@
+#
+# Scene 1
+#
+
+Scene
+{
+	Camera
+	{
+		origin : (0, 0, 0)
+		up : (0, 1, 0)
+		direction : (1, 0, 0)
+		screen : (1024, 1024)
+		right : (0, 0, -1)
+		ambient : 0
+	}
+	light
+	{
+		origin : (0, 80, 20)
+		intensity : 15000
+		color : 0x00FF00
+	}
+	light
+	{
+		origin : (10, 80, 0)
+		intensity : 15000
+		color : 0xFF0000
+	}
+	light
+	{
+		origin : (-10, 80, 0)
+		intensity : 15000
+		color : 0x0000FF
+	}
+
+
+	object
+	{
+		name: Sphere
+		position : (5, 0, 0)
+		reflection : -10
+		Specular : 0.05
+		radius : 0.75
+		transform
+		{
+			scale : 2
+		}
+		color : 0xFFFFFF
+	}
+	object
+	{
+		name : Torus
+		position : (0, 2, 0)
+		Specular : 0.06
+		reflection : 0.3
+		radius : (1, 0.25)
+		transform
+		{
+			rotate : (33, 33, 0)
+		}
+		color : 0xD01F39
+	}
+	object
+	{
+		name : Sierpinski
+		position : (-2, 0, 0)
+		color : 0xCF3AB3
+	}
+	light
+	{
+		origin : (-2, 0.5, 0)
+		intensity : 150
+		color : 0xFFFF00
+	}
+	object
+	{
+		name : Plane
+		position : (0, -1, 0)
+		normal : (0, 1, 0)
+		color : 0xFFFFFF
+	}
+	object
+	{
+		name : Plane
+		position : (0, 100, 0)
+		normal : (0, 1, 0)
+		color : 0x3BCD8C
+	}
+	object
+	{
+		name : Plane
+		position : (0, 0, 100)
+		normal : (0, 0, 1)
+		color : 0xF00FF0
+	}
+	object
+	{
+		name : Plane
+		position : (0, 0, -100)
+		normal : (0, 0, 1)
+		color : 0xFF00F0
+	}
+	object
+	{
+		name : Plane
+		position : (100, 0, 0)
+		normal : (1, 0, 0)
+		color : 0xAA00A0
+	}
+	object
+	{
+		name : Plane
+		position : (-100, 0, 0)
+		normal : (1, 0, 0)
+		color : 0xA00AA0
+	}
+}

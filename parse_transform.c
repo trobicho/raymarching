@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 15:06:25 by dkhatri           #+#    #+#             */
-/*   Updated: 2019/05/10 21:05:29 by dkhatri          ###   ########.fr       */
+/*   Updated: 2019/05/13 16:43:01 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,24 @@ static int	ft_transform(char *line, t_object *obj)
 	return (1);
 }
 
-int			ft_parse_transform(const int fd, t_object *obj)
+int			ft_parse_transform(const int fd, t_object *obj, char **name)
 {
 	char		*line;
 	int			ret;
 
 	if ((ret = ft_process_line(fd, &line)) < 1 || ft_strcmp_rm("{", &line))
-		return (ret == 1 ? 0 : ret);
+	{
+		ft_strdel(name);
+		return (ft_give_error(&line, 0, ret == 1 ? 0 : ret));
+	}
 	while ((ret = ft_skip_comments(fd, &line)) > 0 && ft_strcmp("}", line))
 	{
-		if ((ret = ft_transform(line, obj)) < 1)
-			return (ret);
+		if ((ret = ft_transform(line, obj)) < 1 \
+				&& !ft_strcmp_rm(*name, name))
+			return (ft_give_error(&line, 0, ret));
 		free(line);
 	}
 	if (ret == 1 && !ft_strcmp_rm("}", &line))
 		return (1);
-	return (ret);
+	return (ft_give_error(name, 0, ret));
 }

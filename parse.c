@@ -6,12 +6,13 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 17:18:47 by dkhatri           #+#    #+#             */
-/*   Updated: 2019/05/10 19:55:14 by dkhatri          ###   ########.fr       */
+/*   Updated: 2019/05/13 17:20:40 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "render.h"
+#include <stdlib.h>
 
 int			ft_puterror(int err_no)
 {
@@ -92,7 +93,7 @@ int			main(int ac, char **av)
 	if (!ft_init(&ml))
 		return (ft_puterror(3));
 	if ((ret = ft_parse_file(fd, &ml)) < 1)
-		return (ft_puterror(ret == -1 ? 3 : 4));
+		exit(ft_puterror(ret == -1 ? 3 : 4));
 	close(fd);
 	ml.ray_w = 16;
 	render_init(&ml);

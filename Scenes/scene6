@@ -1,0 +1,165 @@
+Scene
+{
+	Camera
+	{
+		origin : (0, 15, -30)
+		up : (0, 1, 0)
+		direction : (0, 0, 1)
+		right : (1, 0, 0)
+		ambient : 0.03
+		screen : (1024, 1024)
+	}
+
+#light
+	light
+	{
+		origin : (30, 25, -10)
+		intensity : 700
+	}
+	light
+	{
+		origin : (-30, 25, -10)
+		intensity : 700
+	}
+
+#object
+	object
+	{
+		name : Sphere
+		position : (0, 5, 20)
+		radius : 2
+		ks : 0.05
+		specular : 100
+		color : 0xFF0000
+	}
+	object
+	{
+		name : Plane
+		position : (0, 0, 0)
+		normal : (0, 1, 0)
+		color : 0xBCBCBC
+	}
+	object
+	{
+		name : Plane
+		position : (0, 30, 0)
+		normal : (0, 1, 0)
+		color : 0xBCBCBC
+	}
+	object
+	{
+		name : cylinder
+		position : (-13, 0, 10)
+		radius : 2.5
+		specular : 100
+		ks : 0.1
+		color : 0xAAAAAA
+	}
+	object
+	{
+		name : sphere
+		position : (-13, 0, 10)
+		radius : 5
+		specular : 100
+		ks : 0.1
+		color : 0xAAAAAA
+	}
+	object
+	{
+		name : sphere
+		position : (-13, 30, 10)
+		radius : 5
+		specular : 100
+		ks : 0.1
+		color : 0xAAAAAA
+	}
+	object
+	{
+		name : cylinder
+		position : (13, 0, 10)
+		radius : 2.5
+		specular : 100
+		ks : 0.1
+		color : 0xAAAAAA
+	}
+	object
+	{
+		name : sphere
+		position : (13, 0, 10)
+		radius : 5
+		specular : 100
+		ks : 0.1
+		color : 0xAAAAAA
+	}
+	object
+	{
+		name : sphere
+		position : (13, 30, 10)
+		radius : 5
+		specular : 100
+		ks : 0.1
+		color : 0xAAAAAA
+	}
+	object
+	{
+		name : cylinder
+		position : (-13, 0, 40)
+		radius : 2.5
+		specular : 100
+		ks : 0.1
+		color : 0xAAAAAA
+	}
+	object
+	{
+		name : sphere
+		position : (-13, 0, 40)
+		radius : 5
+		specular : 100
+		ks : 0.1
+		color : 0xAAAAAA
+	}
+	object
+	{
+		name : sphere
+		position : (-13, 30, 40)
+		radius : 5
+		specular : 100
+		ks : 0.1
+		color : 0xAAAAAA
+	}
+	object
+	{
+		name : cylinder
+		position : (13, 0, 40)
+		radius : 2.5
+		specular : 100
+		ks : 0.1
+		color : 0xAAAAAA
+	}
+	object
+	{
+		name : sphere
+		position : (13, 0, 40)
+		radius : 5
+		specular : 100
+		ks : 0.1
+		color : 0xAAAAAA
+	}
+	object
+	{
+		name : sphere
+		position : (13, 30, 40)
+		radius : 5
+		specular : 100
+		ks : 0.1
+		color : 0xAAAAAA
+	}
+	object
+	{
+		name : Plane
+		position : (0, 0, 100)
+		normal : (0, 0, 1)
+		specular : 100
+		color : 0x1111AA
+	}
+}
